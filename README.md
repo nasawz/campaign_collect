@@ -1,0 +1,1 @@
+#campaign_collect_ftms

@@ -1,0 +1,40 @@
+{
+    "dev":{
+        "title":"collect-home",
+        "filename":"collect-home",
+        "chunks":{
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "collect-home":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    },
+    "pub":{
+        "title":"collect-home",
+        "filename":"collect-home",
+        "chunks":{
+            "libs/react": null,
+            "libs/react-dom": null,
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "collect-home":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    }
+}
