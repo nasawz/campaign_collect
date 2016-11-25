@@ -9,6 +9,7 @@
                     "css":""
                 }
             },
+            "libs/css3d": null,
             "collect":{
                 "attr":{
                     "js":"",
@@ -23,6 +24,7 @@
         "chunks":{
             "libs/react": null,
             "libs/react-dom": null,
+            "libs/css3d": null,
             "vendor":{
                 "attr":{
                     "js":"",
