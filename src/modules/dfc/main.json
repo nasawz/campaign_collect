@@ -1,0 +1,40 @@
+{
+    "dev":{
+        "title":"dfc",
+        "filename":"dfc",
+        "chunks":{
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "dfc":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    },
+    "pub":{
+        "title":"dfc",
+        "filename":"dfc",
+        "chunks":{
+            "libs/react": null,
+            "libs/react-dom": null,
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "dfc":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    }
+}

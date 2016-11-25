@@ -1,0 +1,40 @@
+{
+    "dev":{
+        "title":"lottery",
+        "filename":"lottery",
+        "chunks":{
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "lottery":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    },
+    "pub":{
+        "title":"lottery",
+        "filename":"lottery",
+        "chunks":{
+            "libs/react": null,
+            "libs/react-dom": null,
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "lottery":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "dev":{
+        "title":"dfc-home",
+        "filename":"dfc-home",
+        "chunks":{
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "dfc-home":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    },
+    "pub":{
+        "title":"dfc-home",
+        "filename":"dfc-home",
+        "chunks":{
+            "libs/react": null,
+            "libs/react-dom": null,
+            "vendor":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            },
+            "dfc-home":{
+                "attr":{
+                    "js":"",
+                    "css":""
+                }
+            }
+        }
+    }
+}
