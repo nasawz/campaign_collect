@@ -1,6 +1,6 @@
 {
     "dev":{
-        "title":"dfc",
+        "title":"身份验证",
         "filename":"dfc",
         "chunks":{
             "vendor":{
@@ -18,7 +18,7 @@
         }
     },
     "pub":{
-        "title":"dfc",
+        "title":"身份验证",
         "filename":"dfc",
         "chunks":{
             "libs/react": null,

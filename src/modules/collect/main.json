@@ -1,6 +1,6 @@
 {
     "dev":{
-        "title":"collect",
+        "title":"妆点圣诞",
         "filename":"index",
         "chunks":{
             "vendor":{
@@ -19,7 +19,7 @@
         }
     },
     "pub":{
-        "title":"collect",
+        "title":"妆点圣诞",
         "filename":"index",
         "chunks":{
             "libs/react": null,

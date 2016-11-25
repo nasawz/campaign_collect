@@ -1,6 +1,6 @@
 {
     "dev":{
-        "title":"lottery",
+        "title":"抽奖",
         "filename":"lottery",
         "chunks":{
             "vendor":{
@@ -18,7 +18,7 @@
         }
     },
     "pub":{
-        "title":"lottery",
+        "title":"抽奖",
         "filename":"lottery",
         "chunks":{
             "libs/react": null,
