@@ -12,6 +12,7 @@ import {parseError} from './parse-error.js'
 import {getTenantAndLoginType} from './tenant-logintype.js'
 
 import ReactDOM from 'react-dom'
+import classNames from 'classnames'
 
 const Container = React.createClass({
     //忽略不需要认证的地址
@@ -150,8 +151,13 @@ const Container = React.createClass({
             acShow,
             acMenus
         } = this.state
+
+        let classes = {
+            'cex-Container': true,
+            'plus': window.innerWidth > 400
+        }
         return (
-            <div className='cex-Container'>
+            <div className={classNames(classes)}>
                 {children}
                 <Toast show={alertShow} type={toastType} closeToast={this.closeToast}>{alertMessage}
                 </Toast>

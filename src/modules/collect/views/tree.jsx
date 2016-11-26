@@ -5,6 +5,7 @@
 import React from 'react'
 import C3D from 'css3d'
 import ReactDOM from 'react-dom'
+import HeadLogo from '../../common/head-logo.jsx'
 
 const Tree = React.createClass({
     resize() {
@@ -55,7 +56,7 @@ const Tree = React.createClass({
         this.s = s
         s.camera.position(0, -50, 0).updateT()
         // s.camera.rotation(-10, 0, 0).updateT()
-        s.size(window.innerWidth, window.innerHeight).material({image: require('../../../img/treebg.jpg'), size: 'cover'}).update()
+        s.size(window.innerWidth, window.innerHeight).material({image: require('../../../img/treebg.jpg'), size: '100% 100%'}).update()
         wrapperEl.appendChild(s.el)
 
         // var sky = C3D.create({
@@ -230,6 +231,7 @@ const Tree = React.createClass({
             <div className='treeView' style={{
                 minHeight: `${minHeight}px`
             }}>
+            <HeadLogo />
                 <img className="t1-a" src={require('../../../img/tree1_a.png')}/>
                 <img className="t1-b" src={require('../../../img/tree1_b.png')}/>
                 <img className="t2-a" src={require('../../../img/tree2_a.png')}/>
