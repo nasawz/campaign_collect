@@ -72,6 +72,9 @@ var devConfig = {
         }
     },
     externals: {
+        'wx': 'window.wx',
+        'animejs': 'anime',
+        'css3d': 'C3D',
     },
     postcss: function () {
         return [require('autoprefixer'), require('precss')]

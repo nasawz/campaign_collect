@@ -2,13 +2,13 @@
  * create by nasa.wang
  */
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 const Home = React.createClass({
+
     render() {
         return (
-            <div>
-                COLLECT home view
-            </div>
+            <div></div>
         )
     }
 

@@ -135,6 +135,8 @@ var prodConfig = {
     ],
     // 使用外链
     externals: {
+        'animejs': 'anime',
+        'css3d': 'C3D',
         'wx': 'window.wx',
         'react': 'React',
         'react-dom': 'ReactDOM',

@@ -9,9 +9,10 @@ import emitter from './emitter.js'
 import request from 'superagent'
 import variable from './variable.js'
 import {parseError} from './parse-error.js'
-import {
-    getTenantAndLoginType
-} from './tenant-logintype.js'
+import {getTenantAndLoginType} from './tenant-logintype.js'
+
+import ReactDOM from 'react-dom'
+
 const Container = React.createClass({
     //忽略不需要认证的地址
     chkIngorePath() {
@@ -26,9 +27,9 @@ const Container = React.createClass({
         })
         return isIngore
     },
-    goLogin(){
+    goLogin() {
         let self = this
-        setTimeout(function () {
+        setTimeout(function() {
             let isIngore = self.chkIngorePath()
             if (!isIngore) {
                 let _tts = getTenantAndLoginType(window.location.href)
@@ -48,9 +49,7 @@ const Container = React.createClass({
                 parseError(err, res)
                 this.goLogin()
             } else {
-                this.setState({
-                    user: res.body,
-                })
+                this.setState({user: res.body})
 
             }
         })
@@ -67,42 +66,58 @@ const Container = React.createClass({
         }
         let self = this
         emitter.addListener('alert', (message, type) => {
-            self.setState({
-                alertShow: true,
-                alertMessage: message,
-                toastType: type
-            })
+            self.setState({alertShow: true, alertMessage: message, toastType: type})
         })
         emitter.addListener('loading', (message, show) => {
-            self.setState({
-                loadShow: show,
-                loadMessage: message,
-            })
+            self.setState({loadShow: show, loadMessage: message})
         })
         emitter.addListener('actionsheet', (acMenus, fun) => {
             this.actionSheetFun = fun
-            self.setState({
-                acShow: true,
-                acMenus: acMenus,
-            })
+            self.setState({acShow: true, acMenus: acMenus})
         })
         emitter.addListener('getuser', (fun) => {
             fun(this.state.user)
         })
     },
+    wxScrollSolve(scrollWrapObj) {
+        if (scrollWrapObj == "" || scrollWrapObj == undefined || scrollWrapObj == null) {
+            return
+        }
+        var overscroll = function(el) {
+            el.addEventListener('touchstart', function() {
+                var top = el.scrollTop,
+                    totalScroll = el.scrollHeight,
+                    currentScroll = top + el.offsetHeight;
+                if (top === 0) {
+                    el.scrollTop = 1;
+                } else if (currentScroll === totalScroll) {
+                    el.scrollTop = top - 1;
+                }
+            });
+            el.addEventListener('touchmove', function(evt) {
+                if (el.offsetHeight < el.scrollHeight)
+                    evt._isScroller = true;
+                }
+            )
+        };
+        overscroll(scrollWrapObj);/*document.querySelector('.MainCon')*/
+        document.body.addEventListener('touchmove', function(evt) {
+            if (!evt._isScroller) {
+                evt.preventDefault();
+            }
+        });
+    },
     componentDidMount() {
         this.actionSheetFun = null
+        let wrapperEl = ReactDOM.findDOMNode(this)
+        this.wxScrollSolve(wrapperEl)
     },
     closeToast() {
-        this.setState({
-            alertShow: false
-        })
+        this.setState({alertShow: false})
     },
     closelSheet() {
         this.actionSheetFun = null
-        this.setState({
-            acShow: false
-        })
+        this.setState({acShow: false})
     },
     getInitialState() {
         return {
@@ -126,14 +141,22 @@ const Container = React.createClass({
         //     children = this.props.children
         // }
         children = this.props.children
-        let {alertShow, alertMessage, toastType, loadShow, loadMessage, acShow, acMenus} = this.state
+        let {
+            alertShow,
+            alertMessage,
+            toastType,
+            loadShow,
+            loadMessage,
+            acShow,
+            acMenus
+        } = this.state
         return (
             <div className='cex-Container'>
-                { children }
+                {children}
                 <Toast show={alertShow} type={toastType} closeToast={this.closeToast}>{alertMessage}
                 </Toast>
-                <Loading show={loadShow} text={loadMessage} />
-                <ActionSheet show={acShow} menus={acMenus} clickSheet={this.clickSheet} closeSheet={this.closelSheet} showCancel />
+                <Loading show={loadShow} text={loadMessage}/>
+                <ActionSheet show={acShow} menus={acMenus} clickSheet={this.clickSheet} closeSheet={this.closelSheet} showCancel/>
             </div>
         )
     }
