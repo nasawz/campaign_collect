@@ -1,0 +1,67 @@
+.homeView {
+    background: url('../../../img/lottery_bg.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+
+    .container {
+        flex: auto;
+        margin-top: 58px;
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+
+        .cex-popup {
+            .cex-actionsheet {
+                background-color: rgba(0,0,0,0.0);
+                // transform:scale(0);
+                .infoContainer {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .cex-actionsheet-toggle {
+                // transform:scale(1);
+            }
+        }
+
+        .lottery_txt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100/2px;
+            height: 50/2px;
+            margin-left: -100/2/2px;
+            margin-top: -50/2/2px;
+            pointer-events: none;
+        }
+
+        .pointer {
+            user-select: none;
+        }
+    }
+}
+
+.plus {
+    .container {
+        justify-content: center;
+    }
+
+    .lottery_txt {
+        width: 100/1.6px;
+        height: 50/1.6px;
+        margin-left: -100/1.6/2px;
+        margin-top: -50/1.6/2px;
+        pointer-events: none;
+    }
+
+    .cex-lottery-turntable {
+        transform: scale(1.2);
+    }
+}

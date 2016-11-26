@@ -56,7 +56,7 @@ const Tree = React.createClass({
         this.s = s
         s.camera.position(0, -50, 0).updateT()
         // s.camera.rotation(-10, 0, 0).updateT()
-        s.size(window.innerWidth, window.innerHeight).material({image: require('../../../img/treebg.jpg'), size: '100% 100%'}).update()
+        s.size(window.innerWidth, window.innerHeight).material({image: require('../../../img/tree_bg.jpg'), size: '100% 100%'}).update()
         wrapperEl.appendChild(s.el)
 
         // var sky = C3D.create({

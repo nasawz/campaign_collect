@@ -154,7 +154,7 @@ const Container = React.createClass({
 
         let classes = {
             'cex-Container': true,
-            'plus': window.innerWidth > 400
+            'plus': window.innerWidth > 370
         }
         return (
             <div className={classNames(classes)}>

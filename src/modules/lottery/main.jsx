@@ -12,6 +12,7 @@ import {navigate} from 'react-mini-router'
 const App = React.createFactory(Routes)
 
 import '../../style/index.less'
+import './style/index.less'
 
 require('safe')(React, {
     errorHandler: function () {

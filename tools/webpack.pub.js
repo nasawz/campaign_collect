@@ -35,12 +35,12 @@ var prodConfig = {
             }, {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract('css!postcss!less',{
-                    publicPath:'../'
+                    publicPath:'../../'
                 })
             }, {
                 test: /\.css/,
                 loader: ExtractTextPlugin.extract('style!css!postcss',{
-                    publicPath:'../'
+                    publicPath:'../../'
                 })
             }, {
                 test: /\.(eot|woff|ttf|svg)/,
@@ -53,7 +53,7 @@ var prodConfig = {
                 loaders: [
                     'url-loader?limit=1000&name='+pkg.version+'/img/[name]' + configWebpack.hash + '.[ext]',
                     // 压缩png图片
-                    'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+                    // 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ],
                 include: path.resolve(configWebpack.path.src)
             }, {
@@ -120,6 +120,7 @@ var prodConfig = {
         }),
         new ExtractTextPlugin(pkg.version+'/css/[name]-' + configWebpack.contenthash + '.css', {
             filenamefilter: function(filename) {
+                console.log(filename);
                 return filename.replace('/js', '')
             },
             allChunks: true,
