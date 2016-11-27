@@ -11,11 +11,17 @@ const Home = React.createClass({
     doShowInfo() {
         this.setState({showInfo: true});
     },
+    doShowFollow() {
+        this.setState({showFollow: true});
+    },
+    doShowSeller() {
+        this.setState({showSeller: true});
+    },
     doCloseInfo() {
-        this.setState({showInfo: false});
+        this.setState({showInfo: false, showFollow: false, showSeller: false});
     },
     getInitialState: function() {
-        return {showInfo: false};
+        return {showInfo: false, showFollow: false, showSeller: false};
     },
     componentDidMount() {
         let w = 572
@@ -28,7 +34,7 @@ const Home = React.createClass({
         tick();
         function tick() {
             ctx.clearRect(0, 0, w, h);
-            sprite.tick(ctx, 572/2, 445/2);
+            sprite.tick(ctx, 572 / 2, 445 / 2);
             window.requestAnimationFrame(tick);
         }
     },
@@ -46,7 +52,7 @@ const Home = React.createClass({
                     <canvas className='kv' ref='kv' width={w} height={h} id="canvas"></canvas>
 
                     <div className='btns'>
-                        <img className='btnJoin' src={require('../../../img/btn_join.png')}/>
+                        <img onClick={this.doShowFollow} className='btnJoin' src={require('../../../img/btn_join.png')}/>
                         <img onClick={this.doShowInfo} className='btnInfo' src={require('../../../img/btn_info.png')}/>
                     </div>
                     <Popup show={this.state.showInfo} closePopup={this.doCloseInfo}>
@@ -56,6 +62,34 @@ const Home = React.createClass({
                             <div className='infoContainer'>
                                 <div className='activityInfoBg'>
                                     <img onClick={this.doCloseInfo} className='btnBack' src={require('../../../img/btn_back.png')}/>
+                                </div>
+                            </div>
+                        </div>
+                    </Popup>
+                    <Popup show={this.state.showFollow} closePopup={this.doCloseInfo}>
+                        <div style={{
+                            height: `${minHeight}px`
+                        }}>
+                            <div className='infoContainer'>
+                                <div className='pop01'>
+                                    <div className='close' onClick={this.doCloseInfo}></div>
+                                    <div className='container'>
+                                        <img className='pop_follow' src={require('../../../img/pop_follow.png')}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Popup>
+                    <Popup show={this.state.showSeller} closePopup={this.doCloseInfo}>
+                        <div style={{
+                            height: `${minHeight}px`
+                        }}>
+                            <div className='infoContainer'>
+                                <div className='pop01'>
+                                    <div className='close' onClick={this.doCloseInfo}></div>
+                                    <div className='container'>
+                                        <img className='pop_seller' src={require('../../../img/pop_seller.png')}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

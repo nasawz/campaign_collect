@@ -22,22 +22,32 @@
         justify-content: center;
         align-items: center;
 
-
-
         .cex-popup {
+            .cex-mask-transition {
+                z-index: 999 !important;
+            }
+
             .cex-actionsheet {
+                z-index: 1000 !important;
                 background-color: rgba(0,0,0,0.0);
-                // transform:scale(0);
+                transform: scale(0);
+
                 .infoContainer {
                     width: 100%;
                     height: 100%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
+                    .close {
+                        min-height: 30px;
+                        width: 100%;
+                    }
                 }
             }
+
             .cex-actionsheet-toggle {
-                // transform:scale(1);
+                transform: scale(1);
             }
         }
     }
@@ -74,10 +84,38 @@
         align-items: flex-end;
     }
 
+    .pop01 {
+        background: url('../../../img/pop_01_bg.png');
+        background-size: 100% 100%;
+        width: 629/2px;
+        height: 560/2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
+        .container {
+            flex-grow: 1;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    }
+
     .btnBack {
         width: 221/2px;
         height: 61/2px;
         margin-bottom: 20px;
+    }
+
+    .pop_follow {
+        width: 509/2px;
+        height: 191/2px;
+    }
+
+    .pop_seller {
+        width: 502/2px;
+        height: 212/2px;
     }
 }
 
@@ -105,5 +143,20 @@
     .btnBack {
         width: 221/1.6px;
         height: 61/1.6px;
+    }
+
+    .pop01 {
+        width: 629/1.6px;
+        height: 560/1.6px;
+    }
+
+    .pop_follow {
+        width: 509/1.6px;
+        height: 191/1.6px;
+    }
+
+    .pop_seller {
+        width: 502/1.6px;
+        height: 212/1.6px;
     }
 }
