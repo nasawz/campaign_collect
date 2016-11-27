@@ -6,6 +6,8 @@ import React from 'react'
 import C3D from 'css3d'
 import ReactDOM from 'react-dom'
 import HeadLogo from '../../common/head-logo.jsx'
+import Popup from 'cex/components/popup/popup.jsx'
+import QRCode from 'cex/components/qrcode/qrcode.jsx'
 
 const Tree = React.createClass({
     resize() {
@@ -46,6 +48,12 @@ const Tree = React.createClass({
     mouseMoveHandler(evt) {
         this.curMouseX = evt.targetTouches[0].pageX
         this.curMouseY = evt.targetTouches[0].pageY
+    },
+    doCloseInfo() {
+        this.setState({showQr: false})
+    },
+    getInitialState() {
+        return {showQr: false}
     },
     componentDidMount() {
         // alert('111')
@@ -202,7 +210,6 @@ const Tree = React.createClass({
         })
         this.scene = scene
         s.addChild(scene)
-        console.log(scene.p1);
 
         // wrapperEl.addEventListener('mousedown', this.mouseDownHandler)
         wrapperEl.addEventListener('touchstart', this.mouseDownHandler)
@@ -231,11 +238,26 @@ const Tree = React.createClass({
             <div className='treeView' style={{
                 minHeight: `${minHeight}px`
             }}>
-            <HeadLogo />
+                <HeadLogo/>
                 <img className="t1-a" src={require('../../../img/tree1_a.png')}/>
                 <img className="t1-b" src={require('../../../img/tree1_b.png')}/>
                 <img className="t2-a" src={require('../../../img/tree2_a.png')}/>
                 <img className="t2-b" src={require('../../../img/tree2_b.png')}/>
+
+                <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
+                    <div style={{
+                        height: `${minHeight}px`
+                    }}>
+                        <div className='infoContainer'>
+                            <div className='popQr'>
+                                <div className='close' onClick={this.doCloseInfo}></div>
+                                <div className='container'>
+                                    <QRCode size={80} value='http://vhome.baleina.cn/cex/#/example/home'></QRCode>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Popup>
             </div>
         )
     }
