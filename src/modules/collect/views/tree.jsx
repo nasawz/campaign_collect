@@ -56,7 +56,6 @@ const Tree = React.createClass({
         return {showQr: false}
     },
     componentDidMount() {
-        // alert('111')
         let wrapperEl = ReactDOM.findDOMNode(this)
         this.wrapperEl = wrapperEl
         //创建场景
