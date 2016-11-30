@@ -157,13 +157,13 @@
                     // flex-direction: column;
                     // justify-content: center;
                     // align-items: flex-start;
-
                     .container {
                         margin-top: 246/2-30px;
                         margin-left: 330/2px;
                         width: 182/2px;
                         height: 182/2px;
-                        .cex-qrcode{
+
+                        .cex-qrcode {
                             width: 100%;
                             height: 100%;
                         }
@@ -178,6 +178,27 @@
 
         .cex-actionsheet-toggle {
             transform: scale(1);
+        }
+    }
+}
+
+.resultView {
+    background: url('../../../img/lottery_bg.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+
+    .container {
+        flex: auto;
+        margin-top: 58px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        img {
+            width: 640/2px;
+            height: 769/2px;
         }
     }
 }
@@ -226,6 +247,7 @@
     .popQr {
         width: 629/1.6px !important;
         height: 944/1.6px !important;
+
         .container {
             margin-top: 246/1.6-30px !important;
             margin-left: 330/1.6px !important;
@@ -233,9 +255,18 @@
             height: 182/1.6px !important;
         }
     }
+
     .popFollow {
         .container {
             margin-top: 52/1.6px;
+        }
+    }
+    .resultView {
+        .container {
+            img {
+                width: 640/1.6px;
+                height: 749/1.6px;
+            }
         }
     }
 }

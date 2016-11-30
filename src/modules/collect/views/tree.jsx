@@ -94,6 +94,10 @@ const Tree = React.createClass({
         // })
         //
         // s.addChild(sky)
+        s.fov = 300;
+        if (window.innerWidth>370) {
+            s.fov = 300;
+        }
         //创建场景
         var scene = C3D.create({
             type: 'sprite',
@@ -210,6 +214,16 @@ const Tree = React.createClass({
         this.scene = scene
         s.addChild(scene)
 
+        //创建1个图片放入场景
+        var star = new C3D.Plane({el: wrapperEl.querySelector('.star')})
+        star.name('star').size(50).position(0, -215, -s.fov).rotation(0, 0, 0).update()
+        s.addChild(star)
+
+        var l360 = new C3D.Plane({el: wrapperEl.querySelector('.l360')})
+        l360.name('l360').size(100).position(0, 35, -s.fov).rotation(90, 0, 0).update()
+        s.addChild(l360)
+
+
         // wrapperEl.addEventListener('mousedown', this.mouseDownHandler)
         wrapperEl.addEventListener('touchstart', this.mouseDownHandler)
         // wrapperEl.addEventListener('mouseup', this.mouseUpHandler)
@@ -242,6 +256,8 @@ const Tree = React.createClass({
                 <img className="t1-b" src={require('../../../img/tree1_b.png')}/>
                 <img className="t2-a" src={require('../../../img/tree2_a.png')}/>
                 <img className="t2-b" src={require('../../../img/tree2_b.png')}/>
+                <img className="star" src={require('../../../img/star.png')}/>
+                <img className="l360" src={require('../../../img/label_360.png')}/>
 
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{

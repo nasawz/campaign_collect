@@ -7,6 +7,7 @@ import {RouterMixin} from 'react-mini-router'
 import Container from '../../common/container.jsx'
 import Home from '../containers/homeContainer.js'
 import Tree from '../containers/treeContainer.js'
+import Result from '../containers/resultContainer.js'
 
 const Routes = React.createClass({
     mixins: [RouterMixin],
@@ -21,6 +22,7 @@ const Routes = React.createClass({
     routes: {
         '/home': 'home',
         '/tree': 'tree',
+        '/result': 'result',
     },
     render () {
         return (
@@ -34,6 +36,9 @@ const Routes = React.createClass({
     },
     tree(params) {
         return <div><Tree params={params} /></div>
+    },
+    result(params) {
+        return <div><Result params={params} /></div>
     },
     notFound(path) {
         if (path == '/') {
