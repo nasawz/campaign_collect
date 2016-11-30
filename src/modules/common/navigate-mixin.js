@@ -31,6 +31,7 @@ module.exports = {
         } else {
             return join(params, '-') + '.html' + (querys ? '?' + stringify(querys) : '')
         }
+
     },
     navTo(params, querys, runType, prefix, jump = false) {
         if (!runType) runType = this.context.runType
@@ -47,6 +48,19 @@ module.exports = {
             let goPath = `${window.location.origin}/-${loginType}-/-${tenant}-/${path}`
             window.location.href = goPath
         }
+    },
+    goHref(modulename,params, querys) {
+        let _tts = getTenantAndLoginType(window.location.href)
+        let tenant = _tts[1]
+        let loginType = _tts[0]
+        let path
+        if (modulename == 'community') {
+            path = '#/'+join(params, '/')+(querys ? '?' + stringify(querys) : '')
+        } else {
+            path = modulename + '.html#/'+join(params, '/') + (querys ? '?' + stringify(querys) : '')
+        }
+        let goPath = `${window.location.origin}/-${loginType}-/-${tenant}-/${path}`
+        window.location.href = goPath
     },
     navReplace(params, querys, runType, prefix, jump = false) {
         if (!runType) runType = this.context.runType

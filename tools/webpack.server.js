@@ -37,7 +37,7 @@ app.use(webpackDevMiddleware(compiler, {
 }))
 app.use(webpackHotMiddleware(compiler))
 // 前端转发
-// app.use(config.server.hostDirectory, proxy('http://localhost:' + port))
+app.use(config.server.hostDirectory, proxy('http://localhost:' + port))
 // 后台转发
 // app.use('/api/', proxy('http://xxx.xxx.xxx.xxx:8081'))
 
