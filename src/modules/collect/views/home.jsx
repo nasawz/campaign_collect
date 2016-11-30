@@ -52,7 +52,7 @@ const Home = React.createClass({
                     <canvas className='kv' ref='kv' width={w} height={h} id="canvas"></canvas>
 
                     <div className='btns'>
-                        <img onClick={this.doShowFollow} className='btnJoin' src={require('../../../img/btn_join.png')}/>
+                        <img onClick={this.doShowSeller} className='btnJoin' src={require('../../../img/btn_join.png')}/>
                         <img onClick={this.doShowInfo} className='btnInfo' src={require('../../../img/btn_info.png')}/>
                     </div>
                     <Popup show={this.state.showInfo} closePopup={this.doCloseInfo}>
@@ -71,7 +71,7 @@ const Home = React.createClass({
                             height: `${minHeight}px`
                         }}>
                             <div className='infoContainer'>
-                                <div className='pop01'>
+                                <div className='pop01 popFollow'>
                                     <div className='close' onClick={this.doCloseInfo}></div>
                                     <div className='container'>
                                         <img className='pop_follow' src={require('../../../img/pop_follow.png')}/>
