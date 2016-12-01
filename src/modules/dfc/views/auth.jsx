@@ -28,7 +28,7 @@ const Auth = React.createClass({
                 <div className='container'>
                     <div className='auth_form'>
                         <div className='cell'>
-                            <lable>经销商编码（DLR Code）：</lable>
+                            <label>经销商编码（DLR Code）：</label>
                             <input type='text' />
                         </div>
                         <img className='btn_submit' src={require('../../../img/btn_submit.png')} />

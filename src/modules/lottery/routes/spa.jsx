@@ -6,6 +6,7 @@ import {RouterMixin} from 'react-mini-router'
 
 import Container from '../../common/container.jsx'
 import Home from '../containers/homeContainer.js'
+import Contacts from '../containers/contactsContainer.js'
 
 const Routes = React.createClass({
     mixins: [RouterMixin],
@@ -19,6 +20,7 @@ const Routes = React.createClass({
     },
     routes: {
         '/home': 'home',
+        '/contacts': 'contacts',
     },
     render () {
         return (
@@ -29,6 +31,9 @@ const Routes = React.createClass({
     },
     home(params) {
         return <div><Home params={params} /></div>
+    },
+    contacts(params) {
+        return <div><Contacts params={params} /></div>
     },
     notFound(path) {
         if (path == '/') {
