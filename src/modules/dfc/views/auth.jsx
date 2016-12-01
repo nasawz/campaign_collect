@@ -26,7 +26,13 @@ const Auth = React.createClass({
             }}>
                 <HeadLogo/>
                 <div className='container'>
-
+                    <div className='auth_form'>
+                        <div className='cell'>
+                            <lable>经销商编码（DLR Code）：</lable>
+                            <input type='text' />
+                        </div>
+                        <img className='btn_submit' src={require('../../../img/btn_submit.png')} />
+                    </div>
                     <Popup show={this.state.showSucc} closePopup={this.doClose}>
                         <div style={{
                             height: `${minHeight}px`

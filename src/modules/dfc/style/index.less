@@ -50,6 +50,42 @@
         justify-content: center;
         align-items: center;
 
+        .auth_form {
+            background: url('../../../img/dfc_form_bg.png');
+            background-size: 100% 100%;
+            width: 623/2px;
+            height: 693/2px;
+
+            .cell {
+                position: relative;
+                top: 158/2px;
+                left: 82/2px;
+                width: 438/2px;
+                height: 104/2px;
+                display: flex;
+                flex-direction: column;
+
+                lable {
+                    color: #C2902D;
+                    font-size: 14px;
+                }
+
+                input {
+                    margin-top: 8px;
+                    border: none;
+                    background-color: #D8D8D8;
+                }
+            }
+
+            .btn_submit {
+                position: relative;
+                top: 502/2px;
+                left: 235/2px;
+                width: 154/2px;
+                height: 60/2px;
+            }
+        }
+
         .cex-popup {
             .cex-mask-transition {
                 z-index: 999 !important;
@@ -130,5 +166,35 @@
     .pop_dfc_succ {
         width: 450/1.6px;
         height: 334/1.6px;
+    }
+
+    .container {
+        .auth_form {
+            width: 623/1.6px;
+            height: 693/1.6px;
+
+            .cell {
+                top: 158/1.6px;
+                left: 82/1.6px;
+                width: 438/1.6px;
+                height: 104/1.6px;
+
+                lable {
+                    font-size: 14px;
+                }
+
+                input {
+                    font-size: 14px;
+                    margin-top: 10px;
+                }
+            }
+
+            .btn_submit {
+                top: 502/1.6px;
+                left: 235/1.6px;
+                width: 154/1.6px;
+                height: 60/1.6px;
+            }
+        }
     }
 }
