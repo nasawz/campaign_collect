@@ -44,10 +44,10 @@
 
     .container {
         flex: auto;
-        margin-top: 58px;
+        margin-top: 180/2px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
 
         .auth_form {
@@ -168,32 +168,36 @@
         height: 334/1.6px;
     }
 
-    .container {
-        .auth_form {
-            width: 623/1.6px;
-            height: 693/1.6px;
+    .DFCauthView {
+        .container {
+            margin-top: 180/1.6px;
 
-            .cell {
-                top: 158/1.6px;
-                left: 82/1.6px;
-                width: 438/1.6px;
-                height: 104/1.6px;
+            .auth_form {
+                width: 623/1.6px;
+                height: 693/1.6px;
 
-                lable {
-                    font-size: 14px;
+                .cell {
+                    top: 158/1.6px;
+                    left: 82/1.6px;
+                    width: 438/1.6px;
+                    height: 104/1.6px;
+
+                    lable {
+                        font-size: 14px;
+                    }
+
+                    input {
+                        font-size: 14px;
+                        margin-top: 10px;
+                    }
                 }
 
-                input {
-                    font-size: 14px;
-                    margin-top: 10px;
+                .btn_submit {
+                    top: 502/1.6px;
+                    left: 235/1.6px;
+                    width: 154/1.6px;
+                    height: 60/1.6px;
                 }
-            }
-
-            .btn_submit {
-                top: 502/1.6px;
-                left: 235/1.6px;
-                width: 154/1.6px;
-                height: 60/1.6px;
             }
         }
     }
