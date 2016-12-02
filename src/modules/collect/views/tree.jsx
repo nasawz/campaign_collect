@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom'
 import HeadLogo from '../../common/head-logo.jsx'
 import Popup from 'cex/components/popup/popup.jsx'
 import QRCode from 'cex/components/qrcode/qrcode.jsx'
+import GiftBar from './giftBar.jsx'
+import ProgressBar from './progressBar.jsx'
 
 const Tree = React.createClass({
     resize() {
@@ -216,7 +218,7 @@ const Tree = React.createClass({
 
         //创建1个图片放入场景
         var star = new C3D.Plane({el: wrapperEl.querySelector('.star')})
-        star.name('star').size(50).position(0, -215, -s.fov).rotation(0, 0, 0).update()
+        star.name('star').size(50).position(0, -215, -s.fov-10).rotation(0, 0, 0).update()
         s.addChild(star)
 
         var l360 = new C3D.Plane({el: wrapperEl.querySelector('.l360')})
@@ -258,7 +260,10 @@ const Tree = React.createClass({
                 <img className="t2-b" src={require('../../../img/tree2_b.png')}/>
                 <img className="star" src={require('../../../img/star.png')}/>
                 <img className="l360" src={require('../../../img/label_360.png')}/>
-
+                <div className='treeBottom'>
+                    <ProgressBar />
+                    <GiftBar />
+                </div>
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{
                         height: `${minHeight}px`
