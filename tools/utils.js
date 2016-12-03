@@ -36,12 +36,15 @@ module.exports = {
 		let jsFileArray = {};
 		//read js filename
 		let srcFiles = fs.readdirSync(path.join(srcPath, jsDirectory));
-		console.log(srcFiles)
+
 
 		srcFiles = srcFiles.filter((item, index) => {
-		    return item !== 'common';
+			if (item == 'common' || item == '.DS_Store' || item.indexOf('-')>-1) {
+				return false
+			}
+		    return true;
 		});
-
+		console.log(srcFiles)
 		srcFiles.map((item, index) => {
 			let p = path.join(srcPath, jsDirectory, item);
 			if (fs.statSync(p).isDirectory()) {

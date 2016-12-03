@@ -75,6 +75,7 @@ var devConfig = {
         'wx': 'window.wx',
         'animejs': 'anime',
         'css3d': 'C3D',
+        'jstween': 'JT',
     },
     postcss: function () {
         return [require('autoprefixer'), require('precss')]

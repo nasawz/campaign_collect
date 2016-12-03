@@ -10,6 +10,7 @@
                 }
             },
             "libs/css3d": null,
+            "libs/jstween": null,
             "libs/TiledImage": null,
             "collect":{
                 "attr":{
@@ -26,6 +27,7 @@
             "libs/react": null,
             "libs/react-dom": null,
             "libs/css3d": null,
+            "libs/jstween": null,
             "libs/TiledImage": null,
             "vendor":{
                 "attr":{

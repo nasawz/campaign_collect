@@ -10,6 +10,7 @@ import Popup from 'cex/components/popup/popup.jsx'
 import QRCode from 'cex/components/qrcode/qrcode.jsx'
 import GiftBar from './giftBar.jsx'
 import ProgressBar from './progressBar.jsx'
+import JT from 'jstween'
 
 const Tree = React.createClass({
     resize() {
@@ -26,8 +27,9 @@ const Tree = React.createClass({
         this.angleY = Math.max(-30, Math.min(30, this.angleY))
 
         // this.scene.rotation(-this.angleY, this.angleX, 0).updateT()
-        this.scene.rotation(0, this.angleX, 0).updateT()
         // this.s.camera.rotate(0, 0.3, 0).updateT()
+        this.scene.rotation(0, this.angleX - 80, 0).updateT()
+        // this.scene.rotation(0, this.angleX-220, 0).updateT()
 
         this.requestAnimationFrame(this.go)
     },
@@ -52,10 +54,228 @@ const Tree = React.createClass({
         this.curMouseY = evt.targetTouches[0].pageY
     },
     doCloseInfo() {
-        this.setState({showQr: false})
+        this.setState(
+            {
+                showQr: false,
+                showShare:false
+            }
+        )
+    },
+    addHelps() {
+        var el_help1 = this.wrapperEl.querySelector('.help1')
+        var help1 = new C3D.Plane({el: el_help1})
+        help1.name('help1').size(30).update()
+        this.scene.addChild(help1)
+        JT.set(el_help1, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_help1, 1.3, {
+            x: 20,
+            y: -70,
+            z: 2,
+            rotationY: 0,
+            rotationZ: -10
+        }, {
+            x: 20,
+            y: -70,
+            z: 2,
+            rotationY: 0,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_help2 = this.wrapperEl.querySelector('.help2')
+        var help2 = new C3D.Plane({el: el_help2})
+        help2.name('help2').size(30).update()
+        this.scene.addChild(help2)
+        JT.set(el_help2, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_help2, 1, {
+            x: -12,
+            y: -70,
+            z: -40,
+            rotationY: 90,
+            rotationZ: -10
+        }, {
+            x: -12,
+            y: -70,
+            z: -40,
+            rotationY: 90,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_help3 = this.wrapperEl.querySelector('.help3')
+        var help3 = new C3D.Plane({el: el_help3})
+        help3.name('help3').size(30).update()
+        this.scene.addChild(help3)
+        JT.set(el_help3, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_help3, 1.2, {
+            x: -50,
+            y: -70,
+            z: -4,
+            rotationY: 180,
+            rotationZ: -10
+        }, {
+            x: -50,
+            y: -70,
+            z: -4,
+            rotationY: 180,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_help4 = this.wrapperEl.querySelector('.help4')
+        var help4 = new C3D.Plane({el: el_help4})
+        help4.name('help4').size(30).update()
+        this.scene.addChild(help4)
+        JT.set(el_help4, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_help4, 1.1, {
+            x: -16,
+            y: -100,
+            z: 30,
+            rotationY: -90,
+            rotationZ: -10
+        }, {
+            x: -16,
+            y: -100,
+            z: 30,
+            rotationY: -90,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_help5 = this.wrapperEl.querySelector('.help5')
+        var help5 = new C3D.Plane({el: el_help5})
+        help5.name('help5').size(30).update()
+        this.scene.addChild(help5)
+        JT.set(el_help5, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_help5, 1.2, {
+            x: -12,
+            y: -140,
+            z: -20,
+            rotationY: 90,
+            rotationZ: 10
+        }, {
+            x: -12,
+            y: -140,
+            z: -20,
+            rotationY: 90,
+            rotationZ: -10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+    },
+    addProducts() {
+        var el_p1 = this.wrapperEl.querySelector('.product_1')
+        var product_1 = new C3D.Plane({el: el_p1})
+        product_1.name('product_1').size(30).update()
+        // .rotation(0, 90, 0).position(4, -100, 30)
+        this.scene.addChild(product_1)
+        JT.set(el_p1, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_p1, 1.1, {
+            x: -10,
+            y: -100,
+            z: 30,
+            rotationY: 90,
+            rotationZ: -10
+        }, {
+            x: -10,
+            y: -100,
+            z: 30,
+            rotationY: 90,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_p2 = this.wrapperEl.querySelector('.product_2')
+        var product_2 = new C3D.Plane({el: el_p2})
+        product_2.name('product_2').size(30).update()
+        // .rotation(0, 180, 0).position(30, -100, -4)
+        this.scene.addChild(product_2)
+        JT.set(el_p2, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_p2, 1.2, {
+            x: 20,
+            y: -120,
+            z: -2,
+            rotationY: 180,
+            rotationZ: -10
+        }, {
+            x: 20,
+            y: -120,
+            z: -2,
+            rotationY: 180,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_p3 = this.wrapperEl.querySelector('.product_3')
+        var product_3 = new C3D.Plane({el: el_p3})
+        product_3.name('product_3').size(30).update()
+        // .rotation(0, -90, 0).position(-4, -100, -30)
+        this.scene.addChild(product_3)
+        JT.set(el_p3, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_p3, 1.1, {
+            x: -16,
+            y: -70,
+            z: -40,
+            rotationY: -90,
+            rotationZ: -10
+        }, {
+            x: -16,
+            y: -70,
+            z: -40,
+            rotationY: -90,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
+
+        var el_p4 = this.wrapperEl.querySelector('.product_4')
+        var product_4 = new C3D.Plane({el: el_p4})
+        product_4.name('product_4').size(30).update()
+        // .rotation(0, 0, 0).position(-30, -100, 4)
+        this.scene.addChild(product_4)
+        JT.set(el_p4, {transformStyle: "preserve-3d"});
+        JT.fromTo(el_p4, 1.2, {
+            x: -50,
+            y: -70,
+            z: 2,
+            rotationY: 0,
+            rotationZ: -10
+        }, {
+            x: -50,
+            y: -70,
+            z: 2,
+            rotationY: 0,
+            rotationZ: 10,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
     },
     getInitialState() {
-        return {showQr: false}
+        return {showQr: false,showShare:false}
     },
     componentDidMount() {
         let wrapperEl = ReactDOM.findDOMNode(this)
@@ -63,43 +283,17 @@ const Tree = React.createClass({
         //创建场景
         var s = new C3D.Stage()
         this.s = s
-        s.camera.position(0, -50, 0).updateT()
         // s.camera.rotation(-10, 0, 0).updateT()
         s.size(window.innerWidth, window.innerHeight).material({image: require('../../../img/tree_bg.jpg'), size: '100% 100%'}).update()
         wrapperEl.appendChild(s.el)
-
-        // var sky = C3D.create({
-        //     type: 'sprite',
-        //     position: [
-        //         0, 0, -s.fov
-        //     ],
-        //     children: [
-        //         {
-        //             type: 'plane',
-        //             // el: wrapperEl.querySelector('.sky'),
-        //             name: 'p3',
-        //             size: [1000],
-        //             position: [
-        //                 0, -500, -300
-        //             ],
-        //             rotation: [
-        //                 0, 0, 0
-        //             ],
-        //             material: [
-        //                 {
-        //                     // color: C3D.getRandomColor()
-        //                     image: require('../../../img/treeBG.jpg')
-        //                 }
-        //             ]
-        //         }
-        //     ]
-        // })
-        //
-        // s.addChild(sky)
-        s.fov = 300;
-        if (window.innerWidth>370) {
-            s.fov = 300;
+        if (window.innerWidth > 370) {
+            s.camera.position(0, -20, 0).updateT()
+            s.fov = 330;
+        } else if (window.innerWidth > 400) {} else {
+            s.camera.position(0, -20, 0).updateT()
+            s.fov = 350;
         }
+
         //创建场景
         var scene = C3D.create({
             type: 'sprite',
@@ -120,7 +314,7 @@ const Tree = React.createClass({
                     origin: [
                         '100%', '50%', '0px'
                     ],
-                    rotation: [0, 35, 0]
+                    // rotation: [0, 35, 0],
                 }, {
                     type: 'plane',
                     el: wrapperEl.querySelector('.t2-a'),
@@ -134,7 +328,7 @@ const Tree = React.createClass({
                     origin: [
                         '100%', '50%', '0px'
                     ],
-                    rotation: [0, -55, 0]
+                    rotation: [0, 90, 0]
                 }, {
                     type: 'plane',
                     el: wrapperEl.querySelector('.t1-b'),
@@ -148,7 +342,7 @@ const Tree = React.createClass({
                     origin: [
                         '0%', '50%', '0px'
                     ],
-                    rotation: [0, 35, 0]
+                    // rotation: [0, 35, 0]
                 }, {
                     type: 'plane',
                     el: wrapperEl.querySelector('.t2-b'),
@@ -162,69 +356,25 @@ const Tree = React.createClass({
                     origin: [
                         '0%', '50%', '0px'
                     ],
-                    rotation: [0, -55, 0]
-                },
-                // , {
-                //     type: 'plane',
-                //     name: 'p3',
-                //     size: [3000],
-                //     position: [
-                //         0, 0, 0
-                //     ],
-                //     rotation: [
-                //         90, 0, 0
-                //     ],
-                //     material: [
-                //         {
-                //             color: C3D.getRandomColor()
-                //         }
-                //     ]
-                // }
-                // , {
-                //     type: 'plane',
-                //     name: 'p3',
-                //     size: [100],
-                //     position: [
-                //         0, 100, 0
-                //     ],
-                //     rotation: [
-                //         0, 45, 0
-                //     ],
-                //     material: [
-                //         {
-                //             color: C3D.getRandomColor()
-                //         }
-                //     ]
-                // }, {
-                //     type: 'plane',
-                //     name: 'p4',
-                //     size: [100],
-                //     position: [
-                //         0, -100, 0
-                //     ],
-                //     rotation: [
-                //         0, -45, 0
-                //     ],
-                //     material: [
-                //         {
-                //             color: C3D.getRandomColor()
-                //         }
-                //     ]
-                // }
+                    rotation: [0, 90, 0]
+                }
             ]
         })
         this.scene = scene
+        this.scene.rotation(0, -80, 0).updateT()
         s.addChild(scene)
+
+        this.addProducts()
+        this.addHelps()
 
         //创建1个图片放入场景
         var star = new C3D.Plane({el: wrapperEl.querySelector('.star')})
-        star.name('star').size(50).position(0, -215, -s.fov-10).rotation(0, 0, 0).update()
+        star.name('star').size(50).position(0, -215, -s.fov - 10).rotation(0, 0, 0).update()
         s.addChild(star)
 
         var l360 = new C3D.Plane({el: wrapperEl.querySelector('.l360')})
         l360.name('l360').size(100).position(0, 35, -s.fov).rotation(90, 0, 0).update()
         s.addChild(l360)
-
 
         // wrapperEl.addEventListener('mousedown', this.mouseDownHandler)
         wrapperEl.addEventListener('touchstart', this.mouseDownHandler)
@@ -249,6 +399,12 @@ const Tree = React.createClass({
     },
     render() {
         let minHeight = window.innerHeight
+        let jt = require('../../../img/jt.png')
+        let jp = require('../../../img/jp.png')
+        let jj = require('../../../img/jj.png')
+        let j1 = require('../../../img/j1.png')
+        let j2 = require('../../../img/j2.png')
+        let j3 = require('../../../img/j3.png')
         return (
             <div className='treeView' style={{
                 minHeight: `${minHeight}px`
@@ -260,21 +416,45 @@ const Tree = React.createClass({
                 <img className="t2-b" src={require('../../../img/tree2_b.png')}/>
                 <img className="star" src={require('../../../img/star.png')}/>
                 <img className="l360" src={require('../../../img/label_360.png')}/>
+                <img className="product_1" src={require('../../../img/product_1.png')}/>
+                <img className="product_2" src={require('../../../img/product_2.png')}/>
+                <img className="product_3" src={require('../../../img/product_3.png')}/>
+                <img className="product_4" src={require('../../../img/product_4.png')}/>
+                <div className="help help1"><img src={jt}/></div>
+                <div className="help help2"><img src={j2}/></div>
+                <div className="help help3"><img src={j3}/></div>
+                <div className="help help4"><img src={j1}/></div>
+                <div className="help help5"><img src={jp}/></div>
                 <div className='treeBottom'>
-                    <ProgressBar />
-                    <GiftBar />
+                    <ProgressBar/>
+                    <GiftBar/>
+                    <img className='btn_my_join' src={require('../../../img/btn_my_join.png')}/>
                 </div>
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{
                         height: `${minHeight}px`
                     }}>
-                        <div className='infoContainer'>
+                        <div className='infoContainer' style={{
+                                alignItems: 'flex-end'
+                            }}>
                             <div className='popQr'>
                                 <div className='close' onClick={this.doCloseInfo}></div>
                                 <div className='container'>
                                     <QRCode size={80} value='http://vhome.baleina.cn/cex/#/example/home'></QRCode>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </Popup>
+                <Popup show={this.state.showShare} closePopup={this.doCloseInfo}>
+                    <div style={{
+                        height: `${minHeight}px`
+                    }} onClick={this.doCloseInfo}>
+                        <div className='infoContainer' style={{
+                                alignItems: 'flex-start',
+                                justifyContent:'flex-end'
+                            }}>
+                            <img className='pop_share' src={require('../../../img/pop_share.png')} />
                         </div>
                     </div>
                 </Popup>
