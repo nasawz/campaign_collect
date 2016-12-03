@@ -133,6 +133,7 @@
             height: auto;
         }
     }
+
     .cex-popup {
         .cex-mask-transition {
             z-index: 999 !important;
@@ -141,8 +142,7 @@
         .cex-actionsheet {
             z-index: 1000 !important;
             background-color: rgba(0,0,0,0.0);
-            transform: scale(0);
-
+            // transform: scale(0);
             .infoContainer {
                 width: 100%;
                 height: 100%;
@@ -151,7 +151,7 @@
                 align-items: center;
 
                 .close {
-                    min-height: 30px;
+                    min-height: 70/2px;
                     width: 100%;
                 }
 
@@ -180,13 +180,44 @@
                         // align-items: center;
                     }
                 }
+
+                .popProduct {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .container {
+                        overflow: scroll;
+                    }
+                }
+
+                .popProduct_ershou {
+                    background: url('../../../img/product_ershou.png');
+                    background-size: 100% 100%;
+                }
+
+                .popProduct_laoyou {
+                    background: url('../../../img/product_laoyou.png');
+                    background-size: 100% 100%;
+                }
+
+                .popProduct_shebao {
+                    background: url('../../../img/product_shebao.png');
+                    background-size: 100% 100%;
+                }
+
+                .popProduct_quanbu {
+                    background: url('../../../img/product_quanbu.png');
+                    background-size: 100% 100%;
+                }
             }
         }
 
         .cex-actionsheet-toggle {
-            transform: scale(1);
+            // transform: scale(1);
         }
     }
+
     .pop_share {
         width: 481/2px;
         height: 222/2px;
@@ -208,6 +239,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+
         img {
             width: 640/2px;
             height: 769/2px;
@@ -256,15 +288,34 @@
         height: 212/1.6px;
     }
 
-    .popQr {
-        width: 629/1.6px !important;
-        height: 944/1.6px !important;
+    .cex-popup {
+        .cex-actionsheet {
+            .infoContainer {
+                .close {
+                    min-height: 70/1.6px;
+                    width: 100%;
+                }
 
-        .container {
-            margin-top: 246/1.6-30px !important;
-            margin-left: 330/1.6px !important;
-            width: 182/1.6px !important;
-            height: 182/1.6px !important;
+                .popQr {
+                    width: 629/1.6px !important;
+                    height: 944/1.6px !important;
+
+                    .container {
+                        margin-top: 246/1.6-30px !important;
+                        margin-left: 330/1.6px !important;
+                        width: 182/1.6px !important;
+                        height: 182/1.6px !important;
+                    }
+                }
+
+                .popProduct_ershou {
+                    // height: auto;
+                    // height: 945/2px;
+                    .container {
+                        // height: 716/2px;
+                    }
+                }
+            }
         }
     }
 
@@ -273,6 +324,7 @@
             margin-top: 52/1.6px;
         }
     }
+
     .resultView {
         .container {
             img {
@@ -281,6 +333,7 @@
             }
         }
     }
+
     .pop_share {
         width: 481/1.6px;
         height: 222/1.6px;

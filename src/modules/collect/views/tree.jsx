@@ -57,7 +57,11 @@ const Tree = React.createClass({
         this.setState(
             {
                 showQr: false,
-                showShare:false
+                showShare:false,
+                showProductErshou:false,
+                showProductLaoyou:false,
+                showProductShebao:false,
+                showProductQuanbu:false,
             }
         )
     },
@@ -275,7 +279,14 @@ const Tree = React.createClass({
         });
     },
     getInitialState() {
-        return {showQr: false,showShare:false}
+        return {
+            showQr: false,
+            showShare:false,
+            showProductErshou:false,
+            showProductLaoyou:false,
+            showProductShebao:false,
+            showProductQuanbu:false
+        }
     },
     componentDidMount() {
         let wrapperEl = ReactDOM.findDOMNode(this)
@@ -455,6 +466,102 @@ const Tree = React.createClass({
                                 justifyContent:'flex-end'
                             }}>
                             <img className='pop_share' src={require('../../../img/pop_share.png')} />
+                        </div>
+                    </div>
+                </Popup>
+                <Popup show={this.state.showProductErshou} closePopup={this.doCloseInfo}>
+                    <div style={{
+                        height: `${minHeight}px`
+                    }}>
+                        <div className='infoContainer' style={{
+                                alignItems: 'flex-end'
+                            }}>
+                            <div className='popProduct popProduct_ershou' style={{
+                                    width:`${window.innerWidth}px`,
+                                    height:`${945*window.innerWidth/640}px`
+                                }}>
+                                <div className='close' onClick={this.doCloseInfo} style={{
+                                        minHeight:`${70*window.innerWidth/640}px`
+                                    }}></div>
+                                <div className='container' style={{
+                                        height:`${720*window.innerWidth/640}px`,
+                                        width:`${560*window.innerWidth/640}px`,
+                                    }}>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Popup>
+                <Popup show={this.state.showProductLaoyou} closePopup={this.doCloseInfo}>
+                    <div style={{
+                        height: `${minHeight}px`
+                    }}>
+                        <div className='infoContainer' style={{
+                                alignItems: 'flex-end'
+                            }}>
+                            <div className='popProduct popProduct_laoyou' style={{
+                                    width:`${window.innerWidth}px`,
+                                    height:`${945*window.innerWidth/640}px`
+                                }}>
+                                <div className='close' onClick={this.doCloseInfo} style={{
+                                        minHeight:`${70*window.innerWidth/640}px`
+                                    }}></div>
+                                <div className='container' style={{
+                                        height:`${720*window.innerWidth/640}px`,
+                                        width:`${560*window.innerWidth/640}px`,
+                                    }}>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Popup>
+                <Popup show={this.state.showProductShebao} closePopup={this.doCloseInfo}>
+                    <div style={{
+                        height: `${minHeight}px`
+                    }}>
+                        <div className='infoContainer' style={{
+                                alignItems: 'flex-end'
+                            }}>
+                            <div className='popProduct popProduct_shebao' style={{
+                                    width:`${window.innerWidth}px`,
+                                    height:`${945*window.innerWidth/640}px`
+                                }}>
+                                <div className='close' onClick={this.doCloseInfo} style={{
+                                        minHeight:`${70*window.innerWidth/640}px`
+                                    }}></div>
+                                <div className='container' style={{
+                                        height:`${720*window.innerWidth/640}px`,
+                                        width:`${560*window.innerWidth/640}px`,
+                                    }}>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Popup>
+                <Popup show={this.state.showProductQuanbu} closePopup={this.doCloseInfo}>
+                    <div style={{
+                        height: `${minHeight}px`
+                    }}>
+                        <div className='infoContainer' style={{
+                                alignItems: 'flex-end'
+                            }}>
+                            <div className='popProduct popProduct_quanbu' style={{
+                                    width:`${window.innerWidth}px`,
+                                    height:`${945*window.innerWidth/640}px`
+                                }}>
+                                <div className='close' onClick={this.doCloseInfo} style={{
+                                        minHeight:`${70*window.innerWidth/640}px`
+                                    }}></div>
+                                <div className='container' style={{
+                                        height:`${688*window.innerWidth/640}px`,
+                                        width:`${560*window.innerWidth/640}px`,
+                                    }}>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </Popup>
