@@ -407,6 +407,17 @@ const Tree = React.createClass({
         }
         this.resize()
         this.requestAnimationFrame(this.go)
+
+        setTimeout(function () {
+            var xscroll_ershou = new window.XScroll({renderTo: '#popProduct_ershou', scrollbarX: false, lockX: true, lockY: false})
+            xscroll_ershou.render()
+            var xscroll_laoyou = new window.XScroll({renderTo: '#popProduct_laoyou', scrollbarX: false, lockX: true, lockY: false})
+            xscroll_laoyou.render()
+            var xscroll_shebao = new window.XScroll({renderTo: '#popProduct_shebao', scrollbarX: false, lockX: true, lockY: false})
+            xscroll_shebao.render()
+            var xscroll_quanbu = new window.XScroll({renderTo: '#popProduct_quanbu', scrollbarX: false, lockX: true, lockY: false})
+            xscroll_quanbu.render()
+        }, 1000)
     },
     render() {
         let minHeight = window.innerHeight
@@ -476,18 +487,22 @@ const Tree = React.createClass({
                         <div className='infoContainer' style={{
                                 alignItems: 'flex-end'
                             }}>
-                            <div className='popProduct popProduct_ershou' style={{
+                            <div className='popProduct popProduct_ershou'style={{
                                     width:`${window.innerWidth}px`,
                                     height:`${945*window.innerWidth/640}px`
                                 }}>
                                 <div className='close' onClick={this.doCloseInfo} style={{
                                         minHeight:`${70*window.innerWidth/640}px`
                                     }}></div>
-                                <div className='container' style={{
+                                <div className='container' id='popProduct_ershou'  style={{
                                         height:`${720*window.innerWidth/640}px`,
                                         width:`${560*window.innerWidth/640}px`,
                                     }}>
-
+                                    <div className='xs-container'>
+                                        <div className="xs-content">
+                                            <img src={require('../../../img/intro_ershou.jpg')} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -507,11 +522,15 @@ const Tree = React.createClass({
                                 <div className='close' onClick={this.doCloseInfo} style={{
                                         minHeight:`${70*window.innerWidth/640}px`
                                     }}></div>
-                                <div className='container' style={{
+                                <div className='container' id='popProduct_laoyou' style={{
                                         height:`${720*window.innerWidth/640}px`,
                                         width:`${560*window.innerWidth/640}px`,
                                     }}>
-
+                                    <div className='xs-container'>
+                                        <div className="xs-content">
+                                            <img src={require('../../../img/intro_laoyou.jpg')} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -531,11 +550,15 @@ const Tree = React.createClass({
                                 <div className='close' onClick={this.doCloseInfo} style={{
                                         minHeight:`${70*window.innerWidth/640}px`
                                     }}></div>
-                                <div className='container' style={{
+                                <div className='container' id='popProduct_shebao' style={{
                                         height:`${720*window.innerWidth/640}px`,
                                         width:`${560*window.innerWidth/640}px`,
                                     }}>
-
+                                    <div className='xs-container'>
+                                        <div className="xs-content">
+                                            <img src={require('../../../img/intro_shebao.jpg')} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -555,11 +578,15 @@ const Tree = React.createClass({
                                 <div className='close' onClick={this.doCloseInfo} style={{
                                         minHeight:`${70*window.innerWidth/640}px`
                                     }}></div>
-                                <div className='container' style={{
+                                <div className='container' id='popProduct_quanbu' style={{
                                         height:`${688*window.innerWidth/640}px`,
                                         width:`${560*window.innerWidth/640}px`,
                                     }}>
-
+                                    <div className='xs-container'>
+                                        <div className="xs-content">
+                                            <img src={require('../../../img/intro_quanbu.jpg')} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

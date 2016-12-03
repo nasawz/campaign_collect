@@ -12,6 +12,7 @@
             "libs/css3d": null,
             "libs/jstween": null,
             "libs/TiledImage": null,
+            "libs/xscroll": null,
             "collect":{
                 "attr":{
                     "js":"",
@@ -26,6 +27,7 @@
         "chunks":{
             "libs/react": null,
             "libs/react-dom": null,
+            "libs/xscroll": null,
             "libs/css3d": null,
             "libs/jstween": null,
             "libs/TiledImage": null,
