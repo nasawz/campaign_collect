@@ -11,6 +11,7 @@ import Auth from '../views/auth.jsx'
 function mapProps(state) {
     return {
         name: state.DFC.name,
+        seller: state.DFC.seller,
     }
 }
 

@@ -6,17 +6,32 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import HeadLogo from '../../common/head-logo.jsx'
 import Popup from 'cex/components/popup/popup.jsx'
+import emitter from '../../common/emitter.js'
+
+import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
+import {encode64, decode64} from 'cex/helpers/base64.js'
+import {_stringify, _parse} from 'cex/helpers/common.js'
 
 const Auth = React.createClass({
-    doClose(){
-        this.setState({
-            showSucc: false
-        })
+    doCertification() {
+        let code = ReactDOM.findDOMNode(this.refs.code).value
+        if (code != '') {
+            this.props.actions.certification(code, (err, seller) => {
+                seller = encode64(_stringify(seller))
+                setItem('collect_seller', seller)
+                // seller = getItem('collect_seller')
+                // console.log(_parse(decode64(seller)));
+                this.setState({showSucc: true})
+            })
+        } else {
+            emitter.emit('alert', '请输入经销商编码', 'fail')
+        }
+    },
+    doClose() {
+        this.setState({showSucc: false})
     },
     getInitialState() {
-        return {
-            showSucc: false
-        }
+        return {showSucc: false}
     },
     render() {
         let minHeight = window.innerHeight
@@ -29,9 +44,9 @@ const Auth = React.createClass({
                     <div className='auth_form'>
                         <div className='cell'>
                             <label>经销商编码（DLR Code）：</label>
-                            <input type='text' />
+                            <input ref='code' type='text'/>
                         </div>
-                        <img className='btn_submit' src={require('../../../img/btn_submit.png')} />
+                        <img onClick={this.doCertification} className='btn_submit' src={require('../../../img/btn_submit.png')}/>
                     </div>
                     <Popup show={this.state.showSucc} closePopup={this.doClose}>
                         <div style={{
