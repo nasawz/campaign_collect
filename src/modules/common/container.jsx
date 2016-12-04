@@ -5,6 +5,9 @@ import React from 'react'
 import Toast from 'cex/components/toast/toast.jsx'
 import Loading from 'cex/components/loading/loading.jsx'
 import ActionSheet from 'cex/components/actionsheet/actionsheet.jsx'
+import Dialog from 'cex/components/dialog/dialog.jsx'
+import Confirm from 'cex/components/confirm/confirm.jsx'
+
 import emitter from './emitter.js'
 import request from 'superagent'
 import variable from './variable.js'
@@ -69,6 +72,14 @@ const Container = React.createClass({
         emitter.addListener('alert', (message, type) => {
             self.setState({alertShow: true, alertMessage: message, toastType: type})
         })
+        emitter.addListener('confirm', (title,content,cancel,confirm, fun) => {
+            this.onConfirmFun = fun
+            self.setState({confirmShow: true,
+                        confirmTitle:title,
+                        confirmContent:content,
+                        confirmCancelBtn:cancel,
+                        confirmConfirmBtn:confirm})
+        })
         emitter.addListener('loading', (message, show) => {
             self.setState({loadShow: show, loadMessage: message})
         })
@@ -110,6 +121,7 @@ const Container = React.createClass({
     },
     componentDidMount() {
         this.actionSheetFun = null
+        this.onConfirmFun = null
         let wrapperEl = ReactDOM.findDOMNode(this)
         this.wxScrollSolve(wrapperEl)
     },
@@ -119,6 +131,21 @@ const Container = React.createClass({
     closelSheet() {
         this.actionSheetFun = null
         this.setState({acShow: false})
+    },
+    cancelHandler() {
+        this.onConfirmFun = null
+        this.setState({
+            confirmShow: false
+        })
+    },
+    confirmHandler(){
+        if (this.onConfirmFun) {
+            this.onConfirmFun()
+        }
+        this.onConfirmFun = null
+        this.setState({
+            confirmShow: false
+        })
     },
     getInitialState() {
         return {
@@ -131,7 +158,13 @@ const Container = React.createClass({
 
             acShow: false,
             acMenus: {},
-            user: null
+            user: null,
+
+            confirmTitle:'',
+            confirmContent:'',
+            confirmCancelBtn:'',
+            confirmConfirmBtn:'',
+            confirmShow:false
         }
     },
 
@@ -149,7 +182,12 @@ const Container = React.createClass({
             loadShow,
             loadMessage,
             acShow,
-            acMenus
+            acMenus,
+            confirmShow,
+            confirmTitle,
+            confirmContent,
+            confirmCancelBtn,
+            confirmConfirmBtn
         } = this.state
 
         let classes = {
@@ -161,6 +199,15 @@ const Container = React.createClass({
                 {children}
                 <Toast show={alertShow} type={toastType} closeToast={this.closeToast}>{alertMessage}
                 </Toast>
+                <Dialog show={confirmShow}>
+                    <Confirm
+                        title={confirmTitle}
+                        content={confirmContent}
+                        cancelBtn={confirmCancelBtn}
+                        confirmBtn={confirmConfirmBtn}
+                        onCancel={this.cancelHandler}
+                        onConfirm={this.confirmHandler} />
+                </Dialog>
                 <Loading show={loadShow} text={loadMessage}/>
                 <ActionSheet show={acShow} menus={acMenus} clickSheet={this.clickSheet} closeSheet={this.closelSheet} showCancel/>
             </div>

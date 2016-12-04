@@ -6,16 +6,25 @@ import React from 'react'
 import C3D from 'css3d'
 import ReactDOM from 'react-dom'
 import HeadLogo from '../../common/head-logo.jsx'
+import NavigateMixin from '../../common/navigate-mixin.js'
+
 import Popup from 'cex/components/popup/popup.jsx'
 import QRCode from 'cex/components/qrcode/qrcode.jsx'
+
 import GiftBar from './giftBar.jsx'
 import ProgressBar from './progressBar.jsx'
 import emitter from '../../common/emitter.js'
 import JT from 'jstween'
 
 const Tree3D = React.createClass({
+    mixins: [NavigateMixin],
+    goHome(){
+        this.navTo([
+            'collect', 'home', this.props.collect.openid
+        ], null, this.context.runType, '/#/')
+    },
     goLottery() {
-        console.log('goLottery');
+        // console.log('goLottery');
         window.location.href = 'lottery.html'
     },
     getQuery(q) {
@@ -313,7 +322,8 @@ const Tree3D = React.createClass({
             showProductLaoyou: false,
             showProductShebao: false,
             showProductQuanbu: false,
-            owner: (this.props.user.userId == this.props.collect.ownerId)
+            // owner: (this.props.user.userId == this.props.collect.ownerId),
+            owner: false,
         }
     },
     componentWillMount() {
@@ -479,8 +489,8 @@ const Tree3D = React.createClass({
         let friendSee = (
             <div className='treeBottom'>
                 <ProgressBar step={step}/>
-                <GiftBar/>
-                <img className='btn_my_join' src={require('../../../img/btn_my_join.png')}/>
+                <GiftBar {...this.props}/>
+                <img onClick={this.goHome} className='btn_my_join' src={require('../../../img/btn_my_join.png')}/>
             </div>
         )
         let ownerSee = (
@@ -490,7 +500,10 @@ const Tree3D = React.createClass({
                     : ''}
                 {step != 0 && step != 5
                     ? (
-                        <div>
+                        <div style={{
+                            marginTop: '20px',
+                            marginBottom: '20px'
+                        }}>
                             <p>已经有<span style={{
                             color: 'red'
                         }}>{step}</span>位好友帮助您装饰啦！</p>
@@ -512,8 +525,8 @@ const Tree3D = React.createClass({
                 {isLight
                     ? (
                         <div style={{
-                            marginTop: '25px',
-                            marginBottom: '25px'
+                            marginTop: '20px',
+                            marginBottom: '20px'
                         }}>
                             <p>哇哦～ 您的圣诞树已经点亮啦！</p>
                             <p>快点击“立即抽奖”拿走奖品吧！</p>
@@ -561,11 +574,11 @@ const Tree3D = React.createClass({
                 <img onClick={this.doShowLaoyou} className="product_2" src={require('../../../img/product_2.png')}/>
                 <img onClick={this.doShowShebao} className="product_3" src={require('../../../img/product_3.png')}/>
                 <img onClick={this.doShowQuanbu} className="product_4" src={require('../../../img/product_4.png')}/>
-                <div className="help help1"><img src={jt}/></div>
-                <div className="help help2"><img src={j2}/></div>
-                <div className="help help3"><img src={j3}/></div>
-                <div className="help help4"><img src={j1}/></div>
-                <div className="help help5"><img src={jp}/></div>
+                <div className="help help1"><img src={jj}/></div>
+                <div className="help help2"><img src={jj}/></div>
+                <div className="help help3"><img src={jj}/></div>
+                <div className="help help4"><img src={jj}/></div>
+                <div className="help help5"><img src={jj}/></div>
                 {this.renderTreeBottom()}
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{
