@@ -10,6 +10,7 @@ import Popup from 'cex/components/popup/popup.jsx'
 import QRCode from 'cex/components/qrcode/qrcode.jsx'
 import GiftBar from './giftBar.jsx'
 import ProgressBar from './progressBar.jsx'
+import emitter from '../../common/emitter.js'
 import JT from 'jstween'
 
 const Tree = React.createClass({
@@ -190,14 +191,14 @@ const Tree = React.createClass({
         JT.set(el_p1, {transformStyle: "preserve-3d"});
         JT.fromTo(el_p1, 1.1, {
             x: -10,
-            y: -100,
-            z: 30,
+            y: -65,
+            z: 38,
             rotationY: 90,
             rotationZ: -10
         }, {
             x: -10,
-            y: -100,
-            z: 30,
+            y: -65,
+            z: 38,
             rotationY: 90,
             rotationZ: 10,
             delay: 0,
@@ -278,6 +279,36 @@ const Tree = React.createClass({
             ease: JT.Quad.InOut
         });
     },
+    doShowErshoue(){
+        this.setState({
+            showProductErshou: true
+        })
+    },
+    doShowLaoyou(){
+        this.setState({
+            showProductLaoyou: true
+        });
+    },
+    doShowShebao(){
+        this.setState({
+            showProductShebao: true
+        });
+    },
+    doShowQuanbu(){
+        this.setState({
+            showProductQuanbu: true
+        });
+    },
+    doShowShare(){
+        this.setState({
+            showShare: true
+        })
+    },
+    doShowQr(){
+        this.setState({
+            showQr: true
+        })
+    },
     getInitialState() {
         return {
             showQr: false,
@@ -285,7 +316,8 @@ const Tree = React.createClass({
             showProductErshou:false,
             showProductLaoyou:false,
             showProductShebao:false,
-            showProductQuanbu:false
+            showProductQuanbu:false,
+            owner:true,
         }
     },
     componentDidMount() {
@@ -378,10 +410,23 @@ const Tree = React.createClass({
         this.addProducts()
         this.addHelps()
 
-        //创建1个图片放入场景
         var star = new C3D.Plane({el: wrapperEl.querySelector('.star')})
         star.name('star').size(50).position(0, -215, -s.fov - 10).rotation(0, 0, 0).update()
         s.addChild(star)
+
+        var star_light = new C3D.Plane({el: wrapperEl.querySelector('.star_light')})
+        star_light.name('star_light').size(150).position(-3, -200, -s.fov+8).rotation(0, 0, 0).update()
+        s.addChild(star_light)
+        JT.set(wrapperEl.querySelector('.star_light'), {transformStyle: "preserve-3d"});
+        JT.fromTo(wrapperEl.querySelector('.star_light'), 1.3, {
+            opacity:0.5,
+        }, {
+            opacity:1,
+            delay: 0,
+            repeat: -1,
+            yoyo: true,
+            ease: JT.Quad.InOut
+        });
 
         var l360 = new C3D.Plane({el: wrapperEl.querySelector('.l360')})
         l360.name('l360').size(100).position(0, 35, -s.fov).rotation(90, 0, 0).update()
@@ -417,7 +462,53 @@ const Tree = React.createClass({
             xscroll_shebao.render()
             var xscroll_quanbu = new window.XScroll({renderTo: '#popProduct_quanbu', scrollbarX: false, lockX: true, lockY: false})
             xscroll_quanbu.render()
+                    // emitter.emit('alert',(
+                    //     <div className='alertMessage'>
+                    //         <p>选择您喜欢的奖品装饰圣诞树，</p>
+                    //         <p>或上传您和好友的亲密合照，</p>
+                    //         <p>即有机会帮助好友赢取圣诞树上</p>
+                    //         <p>的奖品哦！</p>
+                    //     </div>
+                    // ) , 'text')
         }, 1000)
+
+    },
+    renderTreeBottom(){
+        let friendSee = (
+            <div className='treeBottom'>
+                <ProgressBar step={2}/>
+                <GiftBar/>
+                <img className='btn_my_join' src={require('../../../img/btn_my_join.png')}/>
+            </div>
+        )
+        let ownerSee = (
+            <div className='treeBottom'>
+                <ProgressBar step={1}/>
+                {/*<img className='tree_intor' src={require('../../../img/tree_intor.png')} />*/}
+                {/*
+                <div>
+                    <p>已经有<span style={{
+                            color:'red'
+                        }}>1</span>位好友帮助您装饰啦！</p>
+                    <p>想要拿走奖品，快快邀请好友帮忙吧！</p>
+                </div>
+                    */}
+                <div>
+                    <p>您的<span style={{
+                            color:'red'
+                        }}>5</span>位好友已帮助您完成装扮圣诞树！</p>
+                    <p>马上点击“到店赢礼”，到经销店完成验证</p>
+                    <p>就有机会抽取圣诞树上的奖品，快快行动吧～</p>
+                </div>
+                {/*<img onClick={this.doShowShare} className='btn_inv_friend' src={require('../../../img/btn_inv_friend.png')}/>*/}
+                <img onClick={this.doShowQr} className='btn_go_4s' src={require('../../../img/btn_go_4s.png')}/>
+            </div>
+        )
+        if (this.state.owner) {
+            return ownerSee
+        }else{
+            return friendSee
+        }
     },
     render() {
         let minHeight = window.innerHeight
@@ -437,21 +528,18 @@ const Tree = React.createClass({
                 <img className="t2-a" src={require('../../../img/tree2_a.png')}/>
                 <img className="t2-b" src={require('../../../img/tree2_b.png')}/>
                 <img className="star" src={require('../../../img/star.png')}/>
+                <img className="star_light" src={require('../../../img/star_light.png')}/>
                 <img className="l360" src={require('../../../img/label_360.png')}/>
-                <img className="product_1" src={require('../../../img/product_1.png')}/>
-                <img className="product_2" src={require('../../../img/product_2.png')}/>
-                <img className="product_3" src={require('../../../img/product_3.png')}/>
-                <img className="product_4" src={require('../../../img/product_4.png')}/>
+                <img onClick={this.doShowErshoue} className="product_1" src={require('../../../img/product_1.png')}/>
+                <img onClick={this.doShowLaoyou} className="product_2" src={require('../../../img/product_2.png')}/>
+                <img onClick={this.doShowShebao} className="product_3" src={require('../../../img/product_3.png')}/>
+                <img onClick={this.doShowQuanbu} className="product_4" src={require('../../../img/product_4.png')}/>
                 <div className="help help1"><img src={jt}/></div>
                 <div className="help help2"><img src={j2}/></div>
                 <div className="help help3"><img src={j3}/></div>
                 <div className="help help4"><img src={j1}/></div>
                 <div className="help help5"><img src={jp}/></div>
-                <div className='treeBottom'>
-                    <ProgressBar/>
-                    <GiftBar/>
-                    <img className='btn_my_join' src={require('../../../img/btn_my_join.png')}/>
-                </div>
+                { this.renderTreeBottom() }
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{
                         height: `${minHeight}px`
