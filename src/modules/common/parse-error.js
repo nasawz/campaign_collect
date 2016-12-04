@@ -10,6 +10,7 @@ export function parseError(err, res) {
     } else if (err) {
         error = '网络请求失败'
     }
+    // TODO: 处理用户未登陆
     emitter.emit('alert',error,'fail')
     return error
 }

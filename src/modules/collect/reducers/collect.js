@@ -10,6 +10,8 @@ import merge from 'lodash/merge'
 
 const initialState = {
     name: '',
+    user: null,
+    collect: null,
 }
 
 export default function COLLECT(state = initialState, action = null) {

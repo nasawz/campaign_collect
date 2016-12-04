@@ -4,10 +4,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import HeadLogo from '../../common/head-logo.jsx'
+import emitter from '../../common/emitter.js'
+import NavigateMixin from '../../common/navigate-mixin.js'
+
+import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
+import {encode64, decode64} from 'cex/helpers/base64.js'
+import {_stringify, _parse} from 'cex/helpers/common.js'
 
 import Popup from 'cex/components/popup/popup.jsx'
 
 const Home = React.createClass({
+    mixins: [NavigateMixin],
     doShowInfo() {
         this.setState({showInfo: true});
     },
@@ -17,8 +24,33 @@ const Home = React.createClass({
     doShowSeller() {
         this.setState({showSeller: true});
     },
+    doJoin() {
+        if (this.props.isSeller) {
+            this.doShowSeller()
+        } else {
+            let channel = this.props.params.channel
+            emitter.emit('loading', '参与中...', true)
+            this.props.actions.join(channel, (err, collect) => {
+                emitter.emit('loading', '参与中...', false)
+                if (collect) {
+                    this.navTo([
+                        'collect', 'tree'
+                    ], {
+                        cid: collect.id
+                    }, this.context.runType, '/#/')
+                }
+            })
+        }
+    },
     doCloseInfo() {
         this.setState({showInfo: false, showFollow: false, showSeller: false});
+    },
+    getDefaultProps: function() {
+        return {
+            isSeller: getItem('collect_seller')
+                ? true
+                : false
+        }
     },
     getInitialState: function() {
         return {showInfo: false, showFollow: false, showSeller: false};
@@ -52,7 +84,7 @@ const Home = React.createClass({
                     <canvas className='kv' ref='kv' width={w} height={h} id="canvas"></canvas>
 
                     <div className='btns'>
-                        <img onClick={this.doShowSeller} className='btnJoin' src={require('../../../img/btn_join.png')}/>
+                        <img onClick={this.doJoin} className='btnJoin' src={require('../../../img/btn_join.png')}/>
                         <img onClick={this.doShowInfo} className='btnInfo' src={require('../../../img/btn_info.png')}/>
                     </div>
                     <Popup show={this.state.showInfo} closePopup={this.doCloseInfo}>

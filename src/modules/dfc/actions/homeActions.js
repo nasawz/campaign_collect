@@ -24,7 +24,7 @@ export function certification(code,cb) {
             type: ActionTypes.DFC_SAY_HELLO,
             loading: true
         })
-        let url = `/api/sellers/certification`
+        let url = `/${variable.end_point}/sellers/certification`
         let req = request.post(url)
         req.type('form')
         req.send({code:code})

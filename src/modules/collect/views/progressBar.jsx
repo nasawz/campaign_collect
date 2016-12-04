@@ -16,8 +16,7 @@ const ProgressBar = React.createClass({
         let tp3=require('../../../img/progress_bar_3.png')
         let tp4=require('../../../img/progress_bar_4.png')
         let tp5=require('../../../img/progress_bar_5.png')
-
-        let tp = eval('tp'+this.props.step)
+        let tp = eval(`tp${this.props.step}`)
         return (
             <img className='progressBar' src={tp} />
         )

@@ -11,6 +11,8 @@ import Tree from '../views/tree.jsx'
 function mapProps(state) {
     return {
         name: state.COLLECT.name,
+        user: state.COLLECT.user,
+        collect: state.COLLECT.collect,
     }
 }
 
