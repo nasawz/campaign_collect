@@ -13,6 +13,9 @@
             "libs/jstween": null,
             "libs/TiledImage": null,
             "libs/xscroll": null,
+            "libs/lrz": null,
+            "libs/base64": null,
+            "libs/md5": null,
             "collect":{
                 "attr":{
                     "js":"",
@@ -31,6 +34,9 @@
             "libs/css3d": null,
             "libs/jstween": null,
             "libs/TiledImage": null,
+            "libs/lrz": null,
+            "libs/base64": null,
+            "libs/md5": null,
             "vendor":{
                 "attr":{
                     "js":"",

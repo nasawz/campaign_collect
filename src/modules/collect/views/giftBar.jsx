@@ -1,12 +1,69 @@
 import React, {PropTypes} from 'react'
-import emitter from '../../common/emitter.js'
 import ReactDOM from 'react-dom'
+
+import emitter from '../../common/emitter.js'
+import Upload2Upyun from '../../common/Upload2Upyun.js'
+import Variable from '../../common/variable.js'
 
 import indexOf from 'lodash/indexOf'
 
 import '../style/giftBar.less'
 
 const GiftBar = React.createClass({
+    doUpload(selectImgsObj) {
+        let self = this
+        emitter.emit('loading', '', true)
+        let imgs = []
+        let forms = []
+        for (var s in selectImgsObj) {
+            imgs.push(selectImgsObj[s])
+        }
+        imgs.map((item) => {
+            forms.push(item.formData)
+        })
+        emitter.emit('loading', '开始上传图片', true)
+        let upload2Upyun = new Upload2Upyun(null, forms)
+        upload2Upyun.configUpalod({form_api_secret: Variable.form_api_secret, bucket: Variable.bucket})
+        let image_arr = []
+        let imageInfo_arr = []
+        upload2Upyun.upload(function(err, images) {
+            // if (err) console.error(err);
+            // console.log('图片信息：');
+
+            images.map((item) => {
+                image_arr.push(item.absUrl)
+                imageInfo_arr.push({width: item['image-width'], height: item['image-height']})
+            })
+            // self.createBlog(image_arr, imageInfo_arr, obj)
+            emitter.emit('loading', '', false)
+            console.log(image_arr);
+            let data = {
+                tp: 'p',
+                photo: image_arr[0]
+            }
+            self.doSend(data)
+        }, function(currProgress, totalProgress) {
+            emitter.emit('loading', '进度: ' + currProgress + '%', true)
+        })
+    },
+    handelSelectFile(e) {
+        let self = this
+        let file = e.target.files[0]
+        let imageType = /image.*/
+        if (!file.type.match(imageType)) {
+            return 0
+        }
+        window.lrz(file, {
+            width: 640,
+            height: 1136
+        }).then(function(rst) {
+            let selectImgsObj = {
+                'p': rst
+            }
+            self.doUpload(selectImgsObj)
+        }).catch(function() {}).always(function() {})
+
+    },
     componentWillMount() {
         let currOpenid = this.props.user.user.openid
         let support_ids = []
@@ -42,32 +99,34 @@ const GiftBar = React.createClass({
         let data = {
             tp: tp
         }
-        let cid = this.props.collect.id
         emitter.emit('confirm', '助力好友', (
             <div>
                 <p>您确定要用这个礼物</p>
                 <p>帮您的好友装饰圣诞树吗？</p>
             </div>
         ), '我再想想', '装饰圣诞树', function() {
-            self.props.actions.support(cid, data, function(err, collect) {
-                if (err) {
-                    emitter.emit('alert', (
-                        <div>
-                            <p>您已帮助过好友装饰圣诞树啦，</p>
-                            <p>您也快来参加活动吧！
-                            </p>
-                        </div>
-                    ), 'text')
-                } else {
-                    emitter.emit('alert', (
-                        <div>
-                            <p>已成功帮助好友装饰圣诞树，</p>
-                            <p>您也快来参加活动吧！</p>
-                        </div>
-                    ), 'text')
-                }
-            })
-            // console.log('装饰');
+            self.doSend(data)
+        })
+    },
+    doSend(data) {
+        let cid = this.props.collect.id
+        this.props.actions.support(cid, data, function(err, collect) {
+            if (err) {
+                emitter.emit('alert', (
+                    <div>
+                        <p>您已帮助过好友装饰圣诞树啦，</p>
+                        <p>您也快来参加活动吧！
+                        </p>
+                    </div>
+                ), 'text')
+            } else {
+                emitter.emit('alert', (
+                    <div>
+                        <p>已成功帮助好友装饰圣诞树，</p>
+                        <p>您也快来参加活动吧！</p>
+                    </div>
+                ), 'text')
+            }
         })
     },
     render() {
@@ -83,7 +142,7 @@ const GiftBar = React.createClass({
                 <input ref='uploadfile' type='file' style={{
                     width: '0px',
                     height: '0px'
-                }}/>
+                }} onChange={this.handelSelectFile}/>
             </div>
         )
     }
