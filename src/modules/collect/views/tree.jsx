@@ -8,7 +8,7 @@ import Result from './result.jsx'
 
 const Tree = React.createClass({
     getQuery(q) {
-        var m = window.location.href.match(new RegExp('(\\?|#|&)' + q + '=([^&]*)(#|&|$)'))
+        var m = window.location.href.match(new RegExp('(\\?|#|&)' + q + '=([^&|^#]*)(#|&|$)'))
         return !m
             ? null
             : decodeURIComponent(m[2])

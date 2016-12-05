@@ -44,3 +44,30 @@ export function certification(code,cb) {
         })
     })
 }
+
+export function permit(cid, code,cb) {
+    return (dispatch => {
+        dispatch({
+            type: ActionTypes.DFC_SAY_HELLO,
+            loading: true
+        })
+        let url = `/${variable.end_point}/collects/permit`
+        let req = request.post(url)
+        req.type('form')
+        req.send({code:code,cid:cid})
+        req.timeout(10000)
+        req.end((err, res) => {
+            if (err || !res || res.body.error) {
+                parseError(err, res)
+                if(cb)cb(err,null)
+            } else {
+                dispatch({
+                    type: ActionTypes.DFC_SAY_HELLO,
+                    collect: res.body,
+                    loading: false
+                })
+                if(cb)cb(null,res.body)
+            }
+        })
+    })
+}

@@ -13,6 +13,8 @@ import Home from '../containers/homeContainer.js'
 import Tree from '../containers/treeContainer.js'
 import Result from '../containers/resultContainer.js'
 
+import SellerResult from '../views/sellerResult.jsx'
+
 import {getQuery} from 'cex/helpers/url-processing.js'
 import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
 import {encode64, decode64} from 'cex/helpers/base64.js'
@@ -50,10 +52,14 @@ const Routes = React.createClass({
                 window.location.href=`http://auth.vkeve.com?callback=${callback}&client=toyota`
             }
         }
+        this.seller = getItem('collect_seller')?_parse(decode64(getItem('collect_seller'))):null
     },
     render() {
         if (!this.props.user) {
             return <div />
+        }
+        if (this.seller) {
+            return <SellerResult />
         }
         return (
             <Container>

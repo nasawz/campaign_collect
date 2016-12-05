@@ -28,7 +28,7 @@ const Tree3D = React.createClass({
         window.location.href = 'lottery.html'
     },
     getQuery(q) {
-        var m = window.location.href.match(new RegExp('(\\?|#|&)' + q + '=([^&]*)(#|&|$)'))
+        var m = window.location.href.match(new RegExp('(\\?|#|&)' + q + '=([^&|^#]*)(#|&|$)'))
         return !m
             ? null
             : decodeURIComponent(m[2])
@@ -621,7 +621,7 @@ const Tree3D = React.createClass({
                             <div className='popQr'>
                                 <div className='close' onClick={this.doCloseInfo}></div>
                                 <div className='container'>
-                                    <QRCode size={80} value='http://vhome.baleina.cn/cex/#/example/home'></QRCode>
+                                    <QRCode size={80} value={`${window.location.origin+window.location.pathname}dfc.html?cid=${collect.id}`}></QRCode>
                                 </div>
                             </div>
                         </div>

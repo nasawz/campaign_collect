@@ -11,6 +11,7 @@ import merge from 'lodash/merge'
 const initialState = {
     name: '',
     seller: null,
+    collect: null,
 }
 
 export default function DFC(state = initialState, action = null) {

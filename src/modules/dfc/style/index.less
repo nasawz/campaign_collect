@@ -102,9 +102,11 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
                     .container {
-                        margin-top: 0px;
+                        margin-top: 0;
                     }
+
                     .close {
                         min-height: 30px;
                         width: 100%;
@@ -140,6 +142,28 @@
     .pop_dfc_succ {
         width: 450/2px;
         height: 334/2px;
+    }
+}
+
+.resultView {
+    background: url('../../../img/lottery_bg.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+
+    .container {
+        flex: auto;
+        margin-top: 58px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        img {
+            width: 640/2px;
+            height: 769/2px;
+        }
     }
 }
 
@@ -200,6 +224,15 @@
                     width: 154/1.6px;
                     height: 60/1.6px;
                 }
+            }
+        }
+    }
+
+    .resultView {
+        .container {
+            img {
+                width: 640/1.6px;
+                height: 749/1.6px;
             }
         }
     }
