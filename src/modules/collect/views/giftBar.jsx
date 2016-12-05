@@ -141,7 +141,8 @@ const GiftBar = React.createClass({
                 </div>
                 <input ref='uploadfile' type='file' style={{
                     width: '0px',
-                    height: '0px'
+                    height: '0px',
+                    opacity: 0
                 }} onChange={this.handelSelectFile}/>
             </div>
         )

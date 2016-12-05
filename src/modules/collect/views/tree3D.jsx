@@ -331,6 +331,7 @@ const Tree3D = React.createClass({
         // console.log(this.state);
     },
     componentDidMount() {
+        let isLight = parseInt(this.props.collect.status) > 0
         let wrapperEl = ReactDOM.findDOMNode(this)
         this.wrapperEl = wrapperEl
         //创建场景
@@ -427,11 +428,12 @@ const Tree3D = React.createClass({
         var star_light = new C3D.Plane({el: wrapperEl.querySelector('.star_light')})
         star_light.name('star_light').size(150).position(-3, -200, -s.fov + 8).rotation(0, 0, 0).update()
         s.addChild(star_light)
+
         JT.set(wrapperEl.querySelector('.star_light'), {transformStyle: "preserve-3d"});
         JT.fromTo(wrapperEl.querySelector('.star_light'), 1.3, {
-            opacity: 0.5
+            opacity: isLight?0.5:0,
         }, {
-            opacity: 1,
+            opacity: isLight?1:0,
             delay: 0,
             repeat: -1,
             yoyo: true,
@@ -551,6 +553,9 @@ const Tree3D = React.createClass({
         }
     },
     render() {
+        let {collect} = this.props
+        console.log(collect);
+        let isLight = parseInt(collect.status) > 0
         let minHeight = window.innerHeight
         let jt = require('../../../img/jt.png')
         let jp = require('../../../img/jp.png')
@@ -558,6 +563,36 @@ const Tree3D = React.createClass({
         let j1 = require('../../../img/j1.png')
         let j2 = require('../../../img/j2.png')
         let j3 = require('../../../img/j3.png')
+
+        let gifts = []
+        for (var i = 0; i < 5; i++) {
+            let cls = `help help${i+1}`
+            if (collect.supports[i]) {
+                if (collect.supports[i].tp.toString()=='1') {
+                    gifts.push(<div key={i} className={cls}><img src={j1}/></div>)
+                }
+                if (collect.supports[i].tp.toString()=='2') {
+                    gifts.push(<div key={i} className={cls}><img src={j2}/></div>)
+                }
+                if (collect.supports[i].tp.toString()=='3') {
+                    gifts.push(<div key={i} className={cls}><img src={j3}/></div>)
+                }
+                if (collect.supports[i].tp.toString()=='p') {
+                    gifts.push(
+                        <div key={i} className={cls}>
+                            <img src={jp}/>
+                            <img className='sss' src={collect.supports[i].photo+'!sss'} />
+                        </div>
+                    )
+                }
+                if (collect.supports[i].tp.toString()=='t') {
+                    gifts.push(<div key={i} className={cls}><img src={jt}/></div>)
+                }
+            }else{
+                gifts.push(<div key={i} className={cls}><img src={jj}/></div>)
+            }
+        }
+
         return (
             <div className='treeView' style={{
                 minHeight: `${minHeight}px`
@@ -574,11 +609,7 @@ const Tree3D = React.createClass({
                 <img onClick={this.doShowLaoyou} className="product_2" src={require('../../../img/product_2.png')}/>
                 <img onClick={this.doShowShebao} className="product_3" src={require('../../../img/product_3.png')}/>
                 <img onClick={this.doShowQuanbu} className="product_4" src={require('../../../img/product_4.png')}/>
-                <div className="help help1"><img src={jj}/></div>
-                <div className="help help2"><img src={jj}/></div>
-                <div className="help help3"><img src={jj}/></div>
-                <div className="help help4"><img src={jj}/></div>
-                <div className="help help5"><img src={jj}/></div>
+                { gifts }
                 {this.renderTreeBottom()}
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{
