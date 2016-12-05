@@ -322,8 +322,8 @@ const Tree3D = React.createClass({
             showProductLaoyou: false,
             showProductShebao: false,
             showProductQuanbu: false,
-            // owner: (this.props.user.userId == this.props.collect.ownerId),
-            owner: false,
+            owner: (this.props.user.userId == this.props.collect.ownerId),
+            // owner: false,
         }
     },
     componentWillMount() {
