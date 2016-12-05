@@ -84,7 +84,6 @@
                     text-align: right;
                     line-height: 21px;
                     // padding-right: 8px;
-
                     span {
                         color: red;
                         padding-right: 3px;
@@ -124,6 +123,26 @@
     }
 }
 
+.resultView {
+
+    display: flex;
+    flex-direction: column;
+
+    .container {
+        flex: auto;
+        margin-top: 58px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        img {
+            width: 640/2px;
+            height: 769/2px;
+        }
+    }
+}
+
 .plus {
     .container {
         justify-content: center;
@@ -144,22 +163,25 @@
     .contactsView {
         .container {
             margin-top: 130/1.8px;
+
             .contacts_form {
                 width: 623/1.8px;
                 height: 858/1.8px;
+
                 .cell {
                     width: 434/1.8px;
                     height: 42/1.8px;
                     left: 100/1.8px;
+
                     label {
                         font-size: 14px;
                         width: 182/1.8px;
                         line-height: 21px;
+
                         span {
                             padding-right: 3px;
                         }
                     }
-
                 }
 
                 .cell1 {
@@ -188,4 +210,12 @@
         }
     }
 
+    .resultView {
+        .container {
+            img {
+                width: 640/1.6px;
+                height: 749/1.6px;
+            }
+        }
+    }
 }

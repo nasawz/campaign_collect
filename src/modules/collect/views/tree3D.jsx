@@ -25,7 +25,7 @@ const Tree3D = React.createClass({
     },
     goLottery() {
         // console.log('goLottery');
-        window.location.href = 'lottery.html'
+        window.location.href = `lottery.html?cid=${this.props.collect.id}`
     },
     getQuery(q) {
         var m = window.location.href.match(new RegExp('(\\?|#|&)' + q + '=([^&|^#]*)(#|&|$)'))

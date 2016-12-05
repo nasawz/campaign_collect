@@ -6,13 +6,13 @@ import * as Actions from '../actions/homeActions.js'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Contacts from '../views/contacts.jsx'
+import Result from '../views/result.jsx'
 
 function mapProps(state) {
     return {
         name: state.LOTTERY.name,
-        user: state.LOTTERY.user,
         collect: state.LOTTERY.collect,
+        user: state.LOTTERY.user,
     }
 }
 
@@ -22,4 +22,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapProps,mapDispatchToProps)(Contacts)
+export default connect(mapProps,mapDispatchToProps)(Result)

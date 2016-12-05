@@ -13,6 +13,7 @@ const Result = React.createClass({
     render() {
         let minHeight = window.innerHeight
         let result_user_0 = require('../../../img/result_user_0.png')
+        let result_user_end = require('../../../img/result_user_end.png')
         let result_user_1 = require('../../../img/result_user_1.png')
         let result_user_2 = require('../../../img/result_user_2.png')
         let result_user_3 = require('../../../img/result_user_3.png')

@@ -11,6 +11,8 @@ import Home from '../views/home.jsx'
 function mapProps(state) {
     return {
         name: state.LOTTERY.name,
+        user: state.LOTTERY.user,
+        collect: state.LOTTERY.collect,
     }
 }
 
