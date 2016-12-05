@@ -36,7 +36,7 @@ const GiftBar = React.createClass({
             })
             // self.createBlog(image_arr, imageInfo_arr, obj)
             emitter.emit('loading', '', false)
-            console.log(image_arr);
+            // console.log(image_arr);
             let data = {
                 tp: 'p',
                 photo: image_arr[0]
@@ -79,7 +79,42 @@ const GiftBar = React.createClass({
                     </p>
                 </div>
             ), 'text')
+        } else {
+            if (this.props.collect.supports.length == 5) {
+                emitter.emit('alert', (
+                    <div>
+                        <p>您的好友已经去经销店拿奖啦！</p>
+                        <p>您也快来参加活动吧！</p>
+                    </div>
+                ), 'text')
+            } else {
+                emitter.emit('alert', (
+                    <div>
+                        <p style={{
+                            textAlign: 'left',
+                            marginTop: '4px',
+                            marginBottom: '4px'
+                        }}>选择您喜欢的奖品装饰圣诞树，</p>
+                        <p style={{
+                            textAlign: 'left',
+                            marginTop: '4px',
+                            marginBottom: '4px'
+                        }}>或上传您和好友的亲密合照，</p>
+                        <p style={{
+                            textAlign: 'left',
+                            marginTop: '4px',
+                            marginBottom: '4px'
+                        }}>即有机会帮助好友赢取圣诞树上</p>
+                        <p style={{
+                            textAlign: 'left',
+                            marginTop: '4px',
+                            marginBottom: '4px'
+                        }}>的奖品哦！</p>
+                    </div>
+                ), 'text')
+            }
         }
+
     },
     sendPhoto() {
         let self = this
@@ -112,20 +147,38 @@ const GiftBar = React.createClass({
         let cid = this.props.collect.id
         this.props.actions.support(cid, data, function(err, collect) {
             if (err) {
-                emitter.emit('alert', (
-                    <div>
-                        <p>您已帮助过好友装饰圣诞树啦，</p>
-                        <p>您也快来参加活动吧！
-                        </p>
-                    </div>
-                ), 'text')
+                if (collect.body.error.message == '好友已经达成条件了') {
+                    emitter.emit('alert', (
+                        <div>
+                            <p>您的好友已经去经销店拿奖啦！</p>
+                            <p>您也快来参加活动吧！</p>
+                        </div>
+                    ), 'text')
+                } else {
+                    emitter.emit('alert', (
+                        <div>
+                            <p>您已帮助过好友装饰圣诞树啦，</p>
+                            <p>您也快来参加活动吧！
+                            </p>
+                        </div>
+                    ), 'text')
+                }
             } else {
-                emitter.emit('alert', (
-                    <div>
-                        <p>已成功帮助好友装饰圣诞树，</p>
-                        <p>您也快来参加活动吧！</p>
-                    </div>
-                ), 'text')
+                if (collect.supports.length == 5) {
+                    emitter.emit('alert', (
+                        <div>
+                            <p>您的好友已经去经销店拿奖啦！</p>
+                            <p>您也快来参加活动吧！</p>
+                        </div>
+                    ), 'text')
+                } else {
+                    emitter.emit('alert', (
+                        <div>
+                            <p>已成功帮助好友装饰圣诞树，</p>
+                            <p>您也快来参加活动吧！</p>
+                        </div>
+                    ), 'text')
+                }
             }
         })
     },

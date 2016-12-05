@@ -92,7 +92,7 @@ export function support(cid,data, cb) {
         req.end((err, res) => {
             if (err || !res || res.body.error) {
                 parseError(err, res)
-                if(cb)cb(err, null)
+                if(cb)cb(err, res)
             } else {
                 dispatch({type: ActionTypes.COLLECT_SAY_HELLO, collect: res.body, loading: false})
                 if(cb)cb(null, res.body)
