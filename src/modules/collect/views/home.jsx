@@ -29,9 +29,9 @@ const Home = React.createClass({
             this.doShowSeller()
         } else {
             let channel = this.props.params.channel
-            emitter.emit('loading', '参与中...', true)
+            // emitter.emit('loading', '参与中...', true)
             this.props.actions.join(channel, (err, collect) => {
-                emitter.emit('loading', '参与中...', false)
+                // emitter.emit('loading', '参与中...', false)
                 if (collect) {
                     this.navTo([
                         'collect', 'tree'
