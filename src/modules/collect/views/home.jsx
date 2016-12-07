@@ -84,8 +84,9 @@ const Home = React.createClass({
             }}>
                 <HeadLogo/>
                 <div className='container'>
-
-                    <canvas className='kv' ref='kv' width={w} height={h} id="canvas"></canvas>
+                    <div className='kv kvbg'>
+                        <canvas className='kv' ref='kv' width={w} height={h} id="canvas"></canvas>
+                    </div>
 
                     <div className='btns'>
                         <img onClick={this.doJoin} className='btnJoin' src={require('../../../img/btn_join.png')}/>

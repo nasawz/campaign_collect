@@ -33,7 +33,7 @@ var config = {
     },
     server: {                    // webpack开发环境服务器配置
         port: port,              // port for local server
-        hostDirectory: '/-demo-/-demo-/'  // http://host/hostDirectory/
+        hostDirectory: '/campaign_collect/'  // http://host/hostDirectory/
     },
 }
 

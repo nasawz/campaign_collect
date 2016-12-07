@@ -34,6 +34,15 @@ const Tree3D = React.createClass({
             ? null
             : decodeURIComponent(m[2])
     },
+    showPhoto(e) {
+        console.log(e);
+        let src = e.currentTarget.getAttribute('data-src')
+        console.log(src);
+        window.wx.previewImage({
+            current: src,
+            urls: [src]
+        })
+    },
     resize() {
         this.s.size(window.innerWidth, window.innerHeight).update()
     },
@@ -594,7 +603,7 @@ const Tree3D = React.createClass({
                 }
                 if (collect.supports[i].tp.toString() == 'p') {
                     gifts.push(
-                        <div key={i} className={cls}>
+                        <div onClick={this.showPhoto} data-src={collect.supports[i].photo} key={i} className={cls}>
                             <img src={jp}/>
                             <img className='sss' src={collect.supports[i].photo + '!sss'}/>
                         </div>
@@ -611,7 +620,6 @@ const Tree3D = React.createClass({
                 )
             }
         }
-
 
         return (
             <div className='treeView' style={{

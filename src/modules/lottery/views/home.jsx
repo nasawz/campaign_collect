@@ -69,7 +69,10 @@ const Home = React.createClass({
                 minHeight: `${minHeight}px`
             }}>
                 <HeadLogo/>
-                <div className='container'>
+                <div className='container' style={{
+                        marginTop:window.innerWidth>400?'120px':'88px',
+                        justifyContent:'flex-start'
+                    }}>
                     <LotteryTurntable circle={require('../../../img/circle.png')} pointer={require('../../../img/pointer.png')} time={this.state.time} onClick={this.clickHandler} onTransitionEnd={this.endHandler} reward={this.state.reward}>
                         <img className='lottery_txt' src={require('../../../img/lottery_txt.png')}/>
                     </LotteryTurntable>

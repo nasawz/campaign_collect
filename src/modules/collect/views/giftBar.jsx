@@ -67,21 +67,21 @@ const GiftBar = React.createClass({
     componentWillMount() {
         let currOpenid = this.props.user.user.openid
         let support_ids = []
-        if(this.props.collect.supports){
+        if (this.props.collect.supports) {
             this.props.collect.supports.map((item) => {
                 support_ids.push(item.openid)
             })
         }
         let isSupported = indexOf(support_ids, currOpenid) > -1
         if (isSupported) {
-            if (this.props.collect.supports&&this.props.collect.supports.length == 5) {
+            if (this.props.collect.supports && this.props.collect.supports.length == 5) {
                 emitter.emit('alert', (
                     <div>
                         <p>您的好友已经去经销店拿奖啦！</p>
                         <p>您也快来参加活动吧！</p>
                     </div>
                 ), 'text')
-            }else{
+            } else {
                 emitter.emit('alert', (
                     <div>
                         <p>您已帮助过好友装饰圣诞树啦，</p>
@@ -91,7 +91,7 @@ const GiftBar = React.createClass({
                 ), 'text')
             }
         } else {
-            if (this.props.collect.supports&&this.props.collect.supports.length == 5) {
+            if (this.props.collect.supports && this.props.collect.supports.length == 5) {
                 emitter.emit('alert', (
                     <div>
                         <p>您的好友已经去经销店拿奖啦！</p>
@@ -128,6 +128,25 @@ const GiftBar = React.createClass({
 
     },
     sendPhoto() {
+        let currOpenid = this.props.user.user.openid
+        let support_ids = []
+        if (this.props.collect.supports) {
+            this.props.collect.supports.map((item) => {
+                support_ids.push(item.openid)
+            })
+        }
+        let isSupported = indexOf(support_ids, currOpenid) > -1
+        if (isSupported) {
+            emitter.emit('alert', (
+                <div>
+                    <p>您已帮助过好友装饰圣诞树啦，</p>
+                    <p>您也快来参加活动吧！
+                    </p>
+                </div>
+            ), 'text')
+            return
+        }
+
         let self = this
         emitter.emit('confirm', '助力好友', (
             <div>
@@ -140,6 +159,24 @@ const GiftBar = React.createClass({
         })
     },
     sendGift(e) {
+        let currOpenid = this.props.user.user.openid
+        let support_ids = []
+        if (this.props.collect.supports) {
+            this.props.collect.supports.map((item) => {
+                support_ids.push(item.openid)
+            })
+        }
+        let isSupported = indexOf(support_ids, currOpenid) > -1
+        if (isSupported) {
+            emitter.emit('alert', (
+                <div>
+                    <p>您已帮助过好友装饰圣诞树啦，</p>
+                    <p>您也快来参加活动吧！
+                    </p>
+                </div>
+            ), 'text')
+            return
+        }
         let self = this
         let tp = e.target.getAttribute('data-tp')
         let data = {
