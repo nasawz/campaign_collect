@@ -56,10 +56,13 @@ const Routes = React.createClass({
     },
     render() {
         if (!this.props.user) {
-            return <div />
+            return <Container><div /></Container>
+        }
+        if (this.props.user.user.seller) {
+            return  <Container><SellerResult /></Container>
         }
         if (this.seller) {
-            return <SellerResult />
+            return  <Container><SellerResult /></Container>
         }
         return (
             <Container>

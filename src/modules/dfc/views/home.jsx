@@ -38,12 +38,9 @@ const Home = React.createClass({
             ? _parse(decode64(getItem('collect_seller')))
             : null
         if (this.seller && this.cid) {
-            console.log(this.seller);
-            console.log(this.cid);
             emitter.emit('loading', '', true)
             this.props.actions.permit(this.cid, this.seller.code, (err, collect) => {
                 emitter.emit('loading', '', false)
-                console.log(err, collect);
                 if (collect) {
                     self.navTo([
                         'dfc', 'result'

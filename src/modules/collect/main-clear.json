@@ -1,0 +1,40 @@
+{
+    "dev": {
+        "title": "collect-clear",
+        "filename": "clear",
+        "chunks": {
+            "vendor": {
+                "attr": {
+                    "js": "",
+                    "css": ""
+                }
+            },
+            "collect-clear": {
+                "attr": {
+                    "js": "",
+                    "css": ""
+                }
+            }
+        }
+    },
+    "pub": {
+        "title": "collect-clear",
+        "filename": "clear",
+        "chunks": {
+            "libs/react": null,
+            "libs/react-dom": null,
+            "vendor": {
+                "attr": {
+                    "js": "",
+                    "css": ""
+                }
+            },
+            "collect-clear": {
+                "attr": {
+                    "js": "",
+                    "css": ""
+                }
+            }
+        }
+    }
+}

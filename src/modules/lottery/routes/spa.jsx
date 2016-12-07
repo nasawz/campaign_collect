@@ -12,6 +12,7 @@ import Container from '../../common/container.jsx'
 import Home from '../containers/homeContainer.js'
 import Contacts from '../containers/contactsContainer.js'
 import Result from '../containers/resultContainer.js'
+import SellerResult from '../views/sellerResult.jsx'
 
 import {getQuery} from 'cex/helpers/url-processing.js'
 import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
@@ -71,10 +72,16 @@ const Routes = React.createClass({
     },
     render() {
         if (!this.props.user) {
-            return <div/>
+            return <Container><div /></Container>
         }
         if (!this.props.collect) {
-            return <div/>
+            return <Container><div /></Container>
+        }
+        if (this.props.user.user.seller) {
+            return <Container><SellerResult /></Container>
+        }
+        if (this.seller) {
+            return <Container><SellerResult /></Container>
         }
         return (
             <Container>
