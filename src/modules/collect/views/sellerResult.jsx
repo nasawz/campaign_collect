@@ -1,8 +1,12 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 import HeadLogo from '../../common/head-logo.jsx'
 
 const SellerResult = React.createClass({
-    render () {
+    componentWillMount() {
+        let link = `${window.location.origin}${window.location.pathname}#/collect/home`
+        global.setWxLink(link)
+    },
+    render() {
         let minHeight = window.innerHeight
         return (
             <div className='resultView' style={{

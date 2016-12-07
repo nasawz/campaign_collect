@@ -3,6 +3,7 @@
         "title":"身份验证",
         "filename":"dfc",
         "chunks":{
+            "libs/jweixin": null,
             "vendor":{
                 "attr":{
                     "js":"",
@@ -23,6 +24,7 @@
         "chunks":{
             "libs/react": null,
             "libs/react-dom": null,
+            "libs/jweixin": null,
             "vendor":{
                 "attr":{
                     "js":"",

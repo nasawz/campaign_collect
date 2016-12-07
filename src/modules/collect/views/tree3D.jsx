@@ -18,10 +18,11 @@ import JT from 'jstween'
 
 const Tree3D = React.createClass({
     mixins: [NavigateMixin],
-    goHome(){
-        this.navTo([
-            'collect', 'home', this.props.collect.openid
-        ], null, this.context.runType, '/#/')
+    goHome() {
+        window.location.href = `index.html#/collect/home/${this.props.collect.openid}`
+        // this.navTo([
+        //     'collect', 'home', this.props.collect.openid
+        // ], null, this.context.runType, '/#/')
     },
     goLottery() {
         // console.log('goLottery');
@@ -327,6 +328,8 @@ const Tree3D = React.createClass({
         }
     },
     componentWillMount() {
+        let link = `${window.location.origin}${window.location.pathname}#/collect/tree?cid=${this.props.collect.id}`
+        global.setWxLink(link)
         // console.log(this.props);
         // console.log(this.state);
     },
@@ -431,9 +434,13 @@ const Tree3D = React.createClass({
 
         JT.set(wrapperEl.querySelector('.star_light'), {transformStyle: "preserve-3d"});
         JT.fromTo(wrapperEl.querySelector('.star_light'), 1.3, {
-            opacity: isLight?0.5:0,
+            opacity: isLight
+                ? 0.5
+                : 0
         }, {
-            opacity: isLight?1:0,
+            opacity: isLight
+                ? 1
+                : 0,
             delay: 0,
             repeat: -1,
             yoyo: true,
@@ -486,7 +493,9 @@ const Tree3D = React.createClass({
 
     },
     renderTreeBottom() {
-        let step = this.props.collect.supports.length
+        let step = this.props.collect.supports
+            ? this.props.collect.supports.length
+            : 0
         let isLight = parseInt(this.props.collect.status) > 0
         let friendSee = (
             <div className='treeBottom'>
@@ -503,8 +512,8 @@ const Tree3D = React.createClass({
                 {step != 0 && step != 5
                     ? (
                         <div style={{
-                            marginTop: '20px',
-                            marginBottom: '20px'
+                            marginTop: '0px',
+                            marginBottom: '0px'
                         }}>
                             <p>已经有<span style={{
                             color: 'red'
@@ -527,15 +536,15 @@ const Tree3D = React.createClass({
                 {isLight
                     ? (
                         <div style={{
-                            marginTop: '20px',
-                            marginBottom: '20px'
+                            marginTop: '0px',
+                            marginBottom: '0px'
                         }}>
                             <p>哇哦～ 您的圣诞树已经点亮啦！</p>
                             <p>快点击“立即抽奖”拿走奖品吧！</p>
                         </div>
                     )
                     : ''}
-                {step != 0 && step != 5
+                {step != 5
                     ? (<img onClick={this.doShowShare} className='btn_inv_friend' src={require('../../../img/btn_inv_friend.png')}/>)
                     : ''}
                 {(step == 5 && !isLight)
@@ -566,32 +575,43 @@ const Tree3D = React.createClass({
 
         let gifts = []
         for (var i = 0; i < 5; i++) {
-            let cls = `help help${i+1}`
-            if (collect.supports[i]) {
-                if (collect.supports[i].tp.toString()=='1') {
-                    gifts.push(<div key={i} className={cls}><img src={j1}/></div>)
+            let cls = `help help${i + 1}`
+            if (collect.supports && collect.supports[i]) {
+                if (collect.supports[i].tp.toString() == '1') {
+                    gifts.push(
+                        <div key={i} className={cls}><img src={j1}/></div>
+                    )
                 }
-                if (collect.supports[i].tp.toString()=='2') {
-                    gifts.push(<div key={i} className={cls}><img src={j2}/></div>)
+                if (collect.supports[i].tp.toString() == '2') {
+                    gifts.push(
+                        <div key={i} className={cls}><img src={j2}/></div>
+                    )
                 }
-                if (collect.supports[i].tp.toString()=='3') {
-                    gifts.push(<div key={i} className={cls}><img src={j3}/></div>)
+                if (collect.supports[i].tp.toString() == '3') {
+                    gifts.push(
+                        <div key={i} className={cls}><img src={j3}/></div>
+                    )
                 }
-                if (collect.supports[i].tp.toString()=='p') {
+                if (collect.supports[i].tp.toString() == 'p') {
                     gifts.push(
                         <div key={i} className={cls}>
                             <img src={jp}/>
-                            <img className='sss' src={collect.supports[i].photo+'!sss'} />
+                            <img className='sss' src={collect.supports[i].photo + '!sss'}/>
                         </div>
                     )
                 }
-                if (collect.supports[i].tp.toString()=='t') {
-                    gifts.push(<div key={i} className={cls}><img src={jt}/></div>)
+                if (collect.supports[i].tp.toString() == 't') {
+                    gifts.push(
+                        <div key={i} className={cls}><img src={jt}/></div>
+                    )
                 }
-            }else{
-                gifts.push(<div key={i} className={cls}><img src={jj}/></div>)
+            } else {
+                gifts.push(
+                    <div key={i} className={cls}><img src={jj}/></div>
+                )
             }
         }
+
 
         return (
             <div className='treeView' style={{
@@ -608,8 +628,7 @@ const Tree3D = React.createClass({
                 <img onClick={this.doShowErshoue} className="product_1" src={require('../../../img/product_1.png')}/>
                 <img onClick={this.doShowLaoyou} className="product_2" src={require('../../../img/product_2.png')}/>
                 <img onClick={this.doShowShebao} className="product_3" src={require('../../../img/product_3.png')}/>
-                <img onClick={this.doShowQuanbu} className="product_4" src={require('../../../img/product_4.png')}/>
-                { gifts }
+                <img onClick={this.doShowQuanbu} className="product_4" src={require('../../../img/product_4.png')}/> {gifts}
                 {this.renderTreeBottom()}
                 <Popup show={this.state.showQr} closePopup={this.doCloseInfo}>
                     <div style={{
@@ -621,7 +640,7 @@ const Tree3D = React.createClass({
                             <div className='popQr'>
                                 <div className='close' onClick={this.doCloseInfo}></div>
                                 <div className='container'>
-                                    <QRCode size={80} value={`${window.location.origin+window.location.pathname}dfc.html?cid=${collect.id}`}></QRCode>
+                                    <QRCode size={80} value={`${window.location.origin + window.location.pathname.replace(/\/[^\/]*\.html$/g, '/')}dfc.html?cid=${collect.id}`}></QRCode>
                                 </div>
                             </div>
                         </div>

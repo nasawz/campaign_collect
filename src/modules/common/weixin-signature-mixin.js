@@ -100,7 +100,7 @@ global.changeWx = function() {
     })
 
     window.wx.onMenuShareTimeline({
-        title: global._wxData.wxtitle + '，' + global._wxData.wxdesc,
+        title: global._wxData.wxtitle + ' ' + global._wxData.wxdesc,
         link: global._wxData.wxlink,
         imgUrl: global._wxData.wximgUrl,
         trigger: function() {},
@@ -115,11 +115,11 @@ global.changeWx = function() {
 }
 
 // TODO: set weixin share data
-let shareImage = ''
+let shareImage = 'http://ces00.b0.upaiyun.com/2016/12/07/upload_8310b8fd0ebf2d96d026449cd91b2ec6.jpg'
 global._wxData = {
-    wxtitle: '',
-    wxlink: '',
-    wxdesc: '',
+    wxtitle: '圣诞倒计时！《妆点圣诞，温暖一冬》活动暖心来袭！',
+    wxlink: 'http://ftms.baleina.cn/campaign_collect/#/collect/home',
+    wxdesc: '快来装饰圣诞树赢取大奖吧！',
     wximgUrl: shareImage
 }
 
@@ -129,6 +129,11 @@ global.setWxTitle = function(title) {
 }
 global.setWxDesc = function(desc) {
     global._wxData.wxdesc = desc
+    global.changeWx()
+}
+global.setWxLink = function(link) {
+    console.log(link);
+    global._wxData.wxlink = link
     global.changeWx()
 }
 global.resetWxData = function() {

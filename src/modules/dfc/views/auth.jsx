@@ -15,6 +15,7 @@ import {_stringify, _parse} from 'cex/helpers/common.js'
 const Auth = React.createClass({
     doCertification() {
         let code = ReactDOM.findDOMNode(this.refs.code).value
+        code = code.toUpperCase()
         if (code != '') {
             this.props.actions.certification(code, (err, seller) => {
                 seller = encode64(_stringify(seller))

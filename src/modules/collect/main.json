@@ -16,6 +16,7 @@
             "libs/lrz": null,
             "libs/base64": null,
             "libs/md5": null,
+            "libs/jweixin": null,
             "collect":{
                 "attr":{
                     "js":"",
@@ -37,6 +38,7 @@
             "libs/lrz": null,
             "libs/base64": null,
             "libs/md5": null,
+            "libs/jweixin": null,
             "vendor":{
                 "attr":{
                     "js":"",

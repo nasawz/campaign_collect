@@ -23,10 +23,10 @@ const Tree = React.createClass({
         if (!this.props.collect) {
             return <div />
         }else{
-            if(this.props.collect.status != '3'){
-                return <Tree3D {...this.props} />
-            }else{
+            if(this.props.collect.status == '3' && this.props.user.userId == this.props.collect.ownerId){
                 return <Result {...this.props} />
+            }else{
+                return <Tree3D {...this.props} />
             }
 
         }

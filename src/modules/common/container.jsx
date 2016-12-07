@@ -13,11 +13,15 @@ import request from 'superagent'
 import variable from './variable.js'
 import {parseError} from './parse-error.js'
 import {getTenantAndLoginType} from './tenant-logintype.js'
+import WeixinSignatureMixin from './weixin-signature-mixin.js'
 
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 
 const Container = React.createClass({
+    mixins: [
+        WeixinSignatureMixin
+    ],
     //忽略不需要认证的地址
     chkIngorePath() {
         let ignorePaths = ['/login']

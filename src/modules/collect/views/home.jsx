@@ -55,6 +55,10 @@ const Home = React.createClass({
     getInitialState: function() {
         return {showInfo: false, showFollow: false, showSeller: false};
     },
+    componentWillMount() {
+        let link = `${window.location.origin}${window.location.pathname}#/collect/home`
+        global.setWxLink(link)
+    },
     componentDidMount() {
         let w = 572
         let h = 445

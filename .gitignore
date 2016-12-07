@@ -2,3 +2,4 @@ dist
 node_modules/
 deploy.js
 variable.js
+webpack.server.js

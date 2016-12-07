@@ -8,7 +8,8 @@ import HeadLogo from '../../common/head-logo.jsx'
 
 const Result = React.createClass({
     componentWillMount() {
-        // console.log(this.props.collect);
+        let link = `${window.location.origin}${window.location.pathname}#/collect/home`
+        global.setWxLink(link)
     },
     render() {
         let minHeight = window.innerHeight

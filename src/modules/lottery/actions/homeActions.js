@@ -6,7 +6,7 @@ import request from 'superagent'
 import variable from '../../common/variable.js'
 import {parseError} from '../../common/parse-error.js'
 
-let access_token = ''
+window.access_token = ''
 
 export function sayHello(name) {
     return (dispatch => {
@@ -29,7 +29,7 @@ export function auth(openid, access_token, cb) {
                 cb(err, null)
             } else {
                 dispatch({type: ActionTypes.LOTTERY_SAY_HELLO, user: res.body, loading: false})
-                access_token = res.body.id
+                window.access_token = res.body.id
                 cb(null, res.body)
             }
         })
@@ -38,7 +38,7 @@ export function auth(openid, access_token, cb) {
 
 export function setUser(user) {
     return (dispatch => {
-        access_token = user.id
+        window.access_token = user.id
         dispatch({type: ActionTypes.LOTTERY_SAY_HELLO, user: user, loading: false})
     })
 }
@@ -46,7 +46,7 @@ export function setUser(user) {
 export function getCollect(cid, cb) {
     return (dispatch => {
         dispatch({type: ActionTypes.LOTTERY_SAY_HELLO, loading: true})
-        let url = `/${variable.end_point}/collects/${cid}?access_token=${access_token}`
+        let url = `/${variable.end_point}/collects/${cid}?access_token=${window.access_token}`
         let req = request.get(url)
         req.timeout(100000)
         req.end((err, res) => {
@@ -66,7 +66,7 @@ export function getCollect(cid, cb) {
 export function contacts(cid, data, cb) {
     return (dispatch => {
         dispatch({type: ActionTypes.LOTTERY_SAY_HELLO, loading: true})
-        let url = `/${variable.end_point}/collects/contacts?access_token=${access_token}`
+        let url = `/${variable.end_point}/collects/contacts?access_token=${window.access_token}`
         let req = request.post(url)
         req.type('form')
         req.send({cid: cid, data: data})
@@ -88,7 +88,7 @@ export function contacts(cid, data, cb) {
 export function lottery(cid, cb) {
     return (dispatch => {
         dispatch({type: ActionTypes.LOTTERY_SAY_HELLO, loading: true})
-        let url = `/${variable.end_point}/collects/lottery?access_token=${access_token}`
+        let url = `/${variable.end_point}/collects/lottery?access_token=${window.access_token}`
         let req = request.post(url)
         req.type('form')
         req.send({cid: cid, aid: variable.activityId})
