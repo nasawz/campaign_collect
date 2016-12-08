@@ -6,7 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import HeadLogo from '../../common/head-logo.jsx'
 import emitter from '../../common/emitter.js'
-import {navigate} from 'react-mini-router'
+import {navigate,replaceNavigate} from 'react-mini-router'
 
 const Contacts = React.createClass({
     componentWillMount() {
@@ -46,7 +46,7 @@ const Contacts = React.createClass({
         }
         this.props.actions.contacts(collect.id, data, (err, collect) => {
             if (collect) {
-                navigate('/lottery/home')
+                replaceNavigate('/lottery/home')
             }
         })
     },
@@ -79,7 +79,7 @@ const Contacts = React.createClass({
                         </div>
                         <div className='cell cell4'>
                             <label>
-                                <span>*</span>地址：
+                                <span>*</span>邮寄地址：
                             </label>
                             <input ref='address' type='text'/>
                         </div>

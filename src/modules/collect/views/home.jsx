@@ -53,7 +53,7 @@ const Home = React.createClass({
         }
     },
     getInitialState: function() {
-        return {showInfo: false, showFollow: false, showSeller: false};
+        return {showInfo: false, showFollow: false, showSeller: true};
     },
     componentWillMount() {
         let link = `${window.location.origin}${window.location.pathname}#/collect/home`
