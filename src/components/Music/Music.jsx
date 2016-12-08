@@ -22,11 +22,13 @@ const Music = React.createClass({
 
     componentDidUpdate() {},
     componentDidMount() {
-        let This = this;
+        let self = this;
         document.body.onclick = function() {
-            if (This.state.play) {
-                This.onClickItem();
-                This.setState({play: false});
+            if (self.state.play) {
+                self.refs.musicCont.className = "music play";
+                let audio = ReactDOM.findDOMNode(self.refs.musicPlay);
+                audio.play();
+                self.setState({play: false});
             }
         }
     },
@@ -35,7 +37,7 @@ const Music = React.createClass({
         return (
             <div className="MusicBox">
                 <span className="music" ref="musicCont" onClick={this.onClickItem}>
-                    <audio ref="musicPlay" autoplay={false} src='res/bx.mp3' loop="loop"></audio>
+                    <audio ref="musicPlay" autoPlay={false} src='res/bx.mp3' loop="loop"></audio>
                 </span>
             </div>
         )

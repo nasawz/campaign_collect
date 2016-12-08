@@ -8,6 +8,7 @@ import HeadLogo from '../../common/head-logo.jsx'
 
 import LotteryTurntable from 'cex/components/lottery-turntable/lottery-turntable.jsx'
 import Popup from 'cex/components/popup/popup.jsx'
+import emitter from '../../common/emitter.js'
 
 import {navigate} from 'react-mini-router'
 
@@ -36,16 +37,6 @@ const Home = React.createClass({
             }
             this.setState({reward: space, time: 1})
         })
-        // // 随机一、二、三等奖
-        // let arr = [0, 1, 2, 3]
-        // let rdm = arr[Math.floor(Math.random() * arr.length)]
-        // let nodrawArr = [4, 5, 6, 7, 8]
-        // // 未中奖时，随机5个角度
-        // if (rdm == 0) {
-        //     rdm = nodrawArr[Math.floor(Math.random() * nodrawArr.length)]
-        // }
-        // let time = this.state.time - 1
-        // this.setState({reward: rdm, time: time})
     },
     endHandler() {
         // this.setState({show: true})
@@ -61,9 +52,16 @@ const Home = React.createClass({
         if (user.userId != collect.ownerId) {
             emitter.emit('alert', '身份异常', 'fail')
         }
+        if (!collect.contacts) {
+            navigate('/lottery/contacts')
+        }
     },
     render() {
+        let {user, collect} = this.props
         let minHeight = window.innerHeight
+        if (!collect.contacts) {
+            return <div />
+        }
         return (
             <div className='homeView' style={{
                 minHeight: `${minHeight}px`

@@ -19,7 +19,7 @@ import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
 import {encode64, decode64} from 'cex/helpers/base64.js'
 import {_stringify, _parse} from 'cex/helpers/common.js'
 
-import {navigate,replaceNavigate} from 'react-mini-router'
+import {navigate} from 'react-mini-router'
 
 import Music from '../../../components/Music/Music.jsx'
 
@@ -64,7 +64,7 @@ const Routes = React.createClass({
         if (this.cid) {
             this.props.actions.getCollect(this.cid, (err, collect) => {
                 if (!collect.contacts) {
-                    replaceNavigate('/lottery/contacts')
+                    navigate('/lottery/contacts')
                 }
             })
         }

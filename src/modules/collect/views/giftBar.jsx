@@ -99,7 +99,7 @@ const GiftBar = React.createClass({
                     </div>
                 ), 'text')
             } else {
-                window.toastTime = 7000
+                window.toastTime = 4000
                 emitter.emit('alert', (
                     <div>
                         <p style={{
@@ -129,70 +129,90 @@ const GiftBar = React.createClass({
 
     },
     sendPhoto() {
-        let currOpenid = this.props.user.user.openid
-        let support_ids = []
-        if (this.props.collect.supports) {
-            this.props.collect.supports.map((item) => {
-                support_ids.push(item.openid)
+        let {collect} = this.props
+        let canSend = true
+        if (collect.supports) {
+            collect.supports.map((item) => {
+                if (item.tp.toString() == 'p') {
+                    canSend = false
+                }
             })
         }
-        let isSupported = indexOf(support_ids, currOpenid) > -1
-        if (isSupported) {
-            emitter.emit('alert', (
-                <div>
-                    <p>您已帮助过好友装饰圣诞树啦，</p>
-                    <p>您也快来参加活动吧！
-                    </p>
-                </div>
-            ), 'text')
-            return
-        }
+        if (canSend) {
+            let currOpenid = this.props.user.user.openid
+            let support_ids = []
+            if (this.props.collect.supports) {
+                this.props.collect.supports.map((item) => {
+                    support_ids.push(item.openid)
+                })
+            }
+            let isSupported = indexOf(support_ids, currOpenid) > -1
+            if (isSupported) {
+                emitter.emit('alert', (
+                    <div>
+                        <p>您已帮助过好友装饰圣诞树啦，</p>
+                        <p>您也快来参加活动吧！
+                        </p>
+                    </div>
+                ), 'text')
+                return
+            }
 
-        let self = this
-        emitter.emit('confirm', '助力好友', (
-            <div>
-                <p>您确定要用上传一张合影</p>
-                <p>帮您的好友装饰圣诞树吗？</p>
-            </div>
-        ), '我再想想', '上传合影', function() {
-            let uploadfile = ReactDOM.findDOMNode(self.refs.uploadfile)
-            uploadfile.click()
-        })
+            let self = this
+            emitter.emit('confirm', '助力好友', (
+                <div>
+                    <p>您确定要用上传一张合影</p>
+                    <p>帮您的好友装饰圣诞树吗？</p>
+                </div>
+            ), '我再想想', '上传合影', function() {
+                let uploadfile = ReactDOM.findDOMNode(self.refs.uploadfile)
+                uploadfile.click()
+            })
+        }
     },
     sendGift(e) {
-
+        let {collect} = this.props
         let tp = e.target.getAttribute('data-tp')
-        // TODO: 只能送一次
-        let currOpenid = this.props.user.user.openid
-        let support_ids = []
-        if (this.props.collect.supports) {
-            this.props.collect.supports.map((item) => {
-                support_ids.push(item.openid)
+        let canSend = true
+        if (collect.supports) {
+            collect.supports.map((item) => {
+                if (item.tp.toString() == tp) {
+                    canSend = false
+                }
             })
         }
-        let isSupported = indexOf(support_ids, currOpenid) > -1
-        if (isSupported) {
-            emitter.emit('alert', (
+        if (canSend) {
+            let currOpenid = this.props.user.user.openid
+            let support_ids = []
+            if (this.props.collect.supports) {
+                this.props.collect.supports.map((item) => {
+                    support_ids.push(item.openid)
+                })
+            }
+            let isSupported = indexOf(support_ids, currOpenid) > -1
+            if (isSupported) {
+                emitter.emit('alert', (
+                    <div>
+                        <p>您已帮助过好友装饰圣诞树啦，</p>
+                        <p>您也快来参加活动吧！
+                        </p>
+                    </div>
+                ), 'text')
+                return
+            }
+            let self = this
+            let data = {
+                tp: tp
+            }
+            emitter.emit('confirm', '助力好友', (
                 <div>
-                    <p>您已帮助过好友装饰圣诞树啦，</p>
-                    <p>您也快来参加活动吧！
-                    </p>
+                    <p>您确定要用这个礼物</p>
+                    <p>帮您的好友装饰圣诞树吗？</p>
                 </div>
-            ), 'text')
-            return
+            ), '我再想想', '装饰圣诞树', function() {
+                self.doSend(data)
+            })
         }
-        let self = this
-        let data = {
-            tp: tp
-        }
-        emitter.emit('confirm', '助力好友', (
-            <div>
-                <p>您确定要用这个礼物</p>
-                <p>帮您的好友装饰圣诞树吗？</p>
-            </div>
-        ), '我再想想', '装饰圣诞树', function() {
-            self.doSend(data)
-        })
     },
     doSend(data) {
         let cid = this.props.collect.id
@@ -205,6 +225,13 @@ const GiftBar = React.createClass({
                             <p>您也快来参加活动吧！</p>
                         </div>
                     ), 'text')
+                }else if(collect.body.error.message == '这里礼品已经送过了'){
+                    emitter.emit('alert', (
+                        <div>
+                            <p>这个礼物已经送过啦！</p>
+                            <p>您再送个别的礼物吧！</p>
+                        </div>
+                    ), 'text')
                 } else {
                     emitter.emit('alert', (
                         <div>
@@ -214,7 +241,6 @@ const GiftBar = React.createClass({
                         </div>
                     ), 'text')
                 }
-                // TODO: 只能送一次
             } else {
                 if (collect.supports.length == 5) {
                     emitter.emit('alert', (
@@ -224,10 +250,12 @@ const GiftBar = React.createClass({
                         </div>
                     ), 'text')
                 } else {
+                    window.toastTime = 4000
                     emitter.emit('alert', (
                         <div>
                             <p>装饰成功！</p>
-                            <p>快转动圣诞树找找您的奖品装饰在哪里吧！</p>
+                            <p>快快转动圣诞树～</p>
+                            <p>找找您的奖品装饰在哪里！</p>
                         </div>
                     ), 'text')
                 }
@@ -235,14 +263,30 @@ const GiftBar = React.createClass({
         })
     },
     render() {
+        let {collect} = this.props
+
+        let style = {
+            '1': {},
+            '2': {},
+            '3': {},
+            't': {},
+            'p': {}
+        }
+        if (collect.supports) {
+            collect.supports.map((item) => {
+                style[item.tp] = {
+                    opacity: '0.6'
+                }
+            })
+        }
         return (
             <div>
                 <div className='giftBar'>
-                    <img data-tp='t' onClick={this.sendGift} className='gifts_t' src={require('../../../img/gifts_t.png')}/>
-                    <img data-tp='1' onClick={this.sendGift} className='gifts_1' src={require('../../../img/gifts_1.png')}/>
-                    <img data-tp='2' onClick={this.sendGift} className='gifts_2' src={require('../../../img/gifts_2.png')}/>
-                    <img data-tp='3' onClick={this.sendGift} className='gifts_3' src={require('../../../img/gifts_3.png')}/>
-                    <img onClick={this.sendPhoto} className='gifts_photo' src={require('../../../img/gifts_photo.png')}/>
+                    <img style={style['t']} data-tp='t' onClick={this.sendGift} className='gifts_t' src={require('../../../img/gifts_t.png')}/>
+                    <img style={style['1']} data-tp='1' onClick={this.sendGift} className='gifts_1' src={require('../../../img/gifts_1.png')}/>
+                    <img style={style['2']} data-tp='2' onClick={this.sendGift} className='gifts_2' src={require('../../../img/gifts_2.png')}/>
+                    <img style={style['3']} data-tp='3' onClick={this.sendGift} className='gifts_3' src={require('../../../img/gifts_3.png')}/>
+                    <img style={style['p']} onClick={this.sendPhoto} className='gifts_photo' src={require('../../../img/gifts_photo.png')}/>
                 </div>
                 <input ref='uploadfile' type='file' style={{
                     width: '0px',

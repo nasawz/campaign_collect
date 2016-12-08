@@ -39,11 +39,48 @@ const Tree3D = React.createClass({
         window.wx.previewImage({current: src, urls: [src]})
     },
     showJJ() {
-        // TODO: 显示加号提示
+        if (this.state.owner) {
+            emitter.emit('alert', (
+                <div>
+                    <p>快邀请好友装饰圣诞树吧！</p>
+                </div>
+            ), 'text')
+        } else {
+            emitter.emit('alert', (
+                <div>
+                    <p>快帮好友装饰圣诞树吧！</p>
+                    <p>可以选择下列4种奖品装饰</p>
+                    <p>或2人亲密合照哦～</p>
+                </div>
+            ), 'text')
+        }
     },
     showFriend(e) {
         let tp = e.currentTarget.getAttribute('data-tp')
-        // TODO: 显示好友提示
+        let nickname = e.currentTarget.getAttribute('data-nickname')
+        let gift = ''
+        switch (tp) {
+            case '1':
+                gift = '2999元Gopro'
+                break;
+            case '2':
+                gift = '1000元旅游卡'
+                break;
+            case '3':
+                gift = '300元礼品卡'
+                break;
+            case 't':
+                gift = '4690元戴森空气净化器'
+                break;
+            default:
+                break;
+        }
+        emitter.emit('alert', (
+            <div>
+                <p>{nickname}已经将奖品“{gift}”</p>
+                <p>装饰到圣诞树上啦！</p>
+            </div>
+        ), 'text')
     },
     resize() {
         this.s.size(window.innerWidth, window.innerHeight).update()
@@ -574,7 +611,6 @@ const Tree3D = React.createClass({
     },
     render() {
         let {collect} = this.props
-        console.log(collect);
         let isLight = parseInt(collect.status) > 0
         let minHeight = window.innerHeight
         let jt = require('../../../img/jt.png')
@@ -590,17 +626,17 @@ const Tree3D = React.createClass({
             if (collect.supports && collect.supports[i]) {
                 if (collect.supports[i].tp.toString() == '1') {
                     gifts.push(
-                        <div onClick={this.showFriend} data-tp='1' key={i} className={cls}><img src={j1}/></div>
+                        <div onClick={this.showFriend} data-nickname={collect.supports[i].user.nickname} data-tp='1' key={i} className={cls}><img src={j1}/></div>
                     )
                 }
                 if (collect.supports[i].tp.toString() == '2') {
                     gifts.push(
-                        <div onClick={this.showFriend} data-tp='2' key={i} className={cls}><img src={j2}/></div>
+                        <div onClick={this.showFriend} data-nickname={collect.supports[i].user.nickname} data-tp='2' key={i} className={cls}><img src={j2}/></div>
                     )
                 }
                 if (collect.supports[i].tp.toString() == '3') {
                     gifts.push(
-                        <div onClick={this.showFriend} data-tp='3' key={i} className={cls}><img src={j3}/></div>
+                        <div onClick={this.showFriend} data-nickname={collect.supports[i].user.nickname} data-tp='3' key={i} className={cls}><img src={j3}/></div>
                     )
                 }
                 if (collect.supports[i].tp.toString() == 'p') {
@@ -613,7 +649,7 @@ const Tree3D = React.createClass({
                 }
                 if (collect.supports[i].tp.toString() == 't') {
                     gifts.push(
-                        <div onClick={this.showFriend} data-tp='t' key={i} className={cls}><img src={jt}/></div>
+                        <div onClick={this.showFriend} data-nickname={collect.supports[i].user.nickname} data-tp='t' key={i} className={cls}><img src={jt}/></div>
                     )
                 }
             } else {
