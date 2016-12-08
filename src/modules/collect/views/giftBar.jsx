@@ -99,6 +99,7 @@ const GiftBar = React.createClass({
                     </div>
                 ), 'text')
             } else {
+                window.toastTime = 7000
                 emitter.emit('alert', (
                     <div>
                         <p style={{
@@ -159,6 +160,9 @@ const GiftBar = React.createClass({
         })
     },
     sendGift(e) {
+
+        let tp = e.target.getAttribute('data-tp')
+        // TODO: 只能送一次
         let currOpenid = this.props.user.user.openid
         let support_ids = []
         if (this.props.collect.supports) {
@@ -178,7 +182,6 @@ const GiftBar = React.createClass({
             return
         }
         let self = this
-        let tp = e.target.getAttribute('data-tp')
         let data = {
             tp: tp
         }
@@ -211,6 +214,7 @@ const GiftBar = React.createClass({
                         </div>
                     ), 'text')
                 }
+                // TODO: 只能送一次
             } else {
                 if (collect.supports.length == 5) {
                     emitter.emit('alert', (

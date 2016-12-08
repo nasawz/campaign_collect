@@ -35,13 +35,15 @@ const Tree3D = React.createClass({
             : decodeURIComponent(m[2])
     },
     showPhoto(e) {
-        console.log(e);
         let src = e.currentTarget.getAttribute('data-src')
-        console.log(src);
-        window.wx.previewImage({
-            current: src,
-            urls: [src]
-        })
+        window.wx.previewImage({current: src, urls: [src]})
+    },
+    showJJ() {
+        // TODO: 显示加号提示
+    },
+    showFriend(e) {
+        let tp = e.currentTarget.getAttribute('data-tp')
+        // TODO: 显示好友提示
     },
     resize() {
         this.s.size(window.innerWidth, window.innerHeight).update()
@@ -588,17 +590,17 @@ const Tree3D = React.createClass({
             if (collect.supports && collect.supports[i]) {
                 if (collect.supports[i].tp.toString() == '1') {
                     gifts.push(
-                        <div key={i} className={cls}><img src={j1}/></div>
+                        <div onClick={this.showFriend} data-tp='1' key={i} className={cls}><img src={j1}/></div>
                     )
                 }
                 if (collect.supports[i].tp.toString() == '2') {
                     gifts.push(
-                        <div key={i} className={cls}><img src={j2}/></div>
+                        <div onClick={this.showFriend} data-tp='2' key={i} className={cls}><img src={j2}/></div>
                     )
                 }
                 if (collect.supports[i].tp.toString() == '3') {
                     gifts.push(
-                        <div key={i} className={cls}><img src={j3}/></div>
+                        <div onClick={this.showFriend} data-tp='3' key={i} className={cls}><img src={j3}/></div>
                     )
                 }
                 if (collect.supports[i].tp.toString() == 'p') {
@@ -611,12 +613,12 @@ const Tree3D = React.createClass({
                 }
                 if (collect.supports[i].tp.toString() == 't') {
                     gifts.push(
-                        <div key={i} className={cls}><img src={jt}/></div>
+                        <div onClick={this.showFriend} data-tp='t' key={i} className={cls}><img src={jt}/></div>
                     )
                 }
             } else {
                 gifts.push(
-                    <div key={i} className={cls}><img src={jj}/></div>
+                    <div onClick={this.showJJ} key={i} className={cls}><img src={jj}/></div>
                 )
             }
         }
