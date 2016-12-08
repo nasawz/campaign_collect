@@ -226,8 +226,8 @@ const GiftBar = React.createClass({
                 } else {
                     emitter.emit('alert', (
                         <div>
-                            <p>已成功帮助好友装饰圣诞树，</p>
-                            <p>您也快来参加活动吧！</p>
+                            <p>装饰成功！</p>
+                            <p>快转动圣诞树找找您的奖品装饰在哪里吧！</p>
                         </div>
                     ), 'text')
                 }

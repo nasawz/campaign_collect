@@ -97,6 +97,12 @@ var prodConfig = {
         ], {
             namePattern: '[name]-' + configWebpack.contenthash + '.js'
         }),
+        new CopyWebpackPlugin([
+            {
+                from: configWebpack.path.src + '/res/',
+                to: 'res/'
+            }
+        ]),        
         new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin(
             {

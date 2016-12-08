@@ -20,6 +20,8 @@ import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
 import {encode64, decode64} from 'cex/helpers/base64.js'
 import {_stringify, _parse} from 'cex/helpers/common.js'
 
+import Music from '../../../components/Music/Music.jsx'
+
 
 const Routes = React.createClass({
     mixins: [RouterMixin],
@@ -66,6 +68,7 @@ const Routes = React.createClass({
         }
         return (
             <Container>
+                <Music />
                 {this.renderCurrentRoute()}
             </Container>
         )

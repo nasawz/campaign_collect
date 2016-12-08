@@ -88,6 +88,12 @@ var devConfig = {
                 to: 'libs/'
             }
         ]),
+        new CopyWebpackPlugin([
+            {
+                from: configWebpack.path.src + '/res/',
+                to: 'res/'
+            }
+        ]),
         new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.js'),
         new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.css$/g,

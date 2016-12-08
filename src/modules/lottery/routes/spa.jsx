@@ -21,6 +21,8 @@ import {_stringify, _parse} from 'cex/helpers/common.js'
 
 import {navigate,replaceNavigate} from 'react-mini-router'
 
+import Music from '../../../components/Music/Music.jsx'
+
 const Routes = React.createClass({
     mixins: [RouterMixin],
     getQuery(q) {
@@ -85,6 +87,7 @@ const Routes = React.createClass({
         }
         return (
             <Container>
+                <Music />
                 {this.renderCurrentRoute()}
             </Container>
         )
