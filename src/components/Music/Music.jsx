@@ -23,14 +23,14 @@ const Music = React.createClass({
     componentDidUpdate() {},
     componentDidMount() {
         let self = this;
-        document.body.onclick = function() {
+        document.body.addEventListener('touchstart', function() {
             if (self.state.play) {
                 self.refs.musicCont.className = "music play";
                 let audio = ReactDOM.findDOMNode(self.refs.musicPlay);
                 audio.play();
                 self.setState({play: false});
             }
-        }
+        });
     },
 
     render() {

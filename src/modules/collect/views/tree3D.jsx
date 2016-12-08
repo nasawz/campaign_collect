@@ -42,7 +42,7 @@ const Tree3D = React.createClass({
         if (this.state.owner) {
             emitter.emit('alert', (
                 <div>
-                    <p>快邀请好友装饰圣诞树吧！</p>
+                    快邀请好友装饰圣诞树吧！
                 </div>
             ), 'text')
         } else {
