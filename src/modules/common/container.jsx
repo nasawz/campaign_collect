@@ -128,6 +128,11 @@ const Container = React.createClass({
         this.onConfirmFun = null
         let wrapperEl = ReactDOM.findDOMNode(this)
         this.wxScrollSolve(wrapperEl)
+        window.shareSuccess = function () {
+            if (_hmt) {
+                _hmt.push(['_trackEvent', '用户', '分享']);
+            }
+        }
     },
     closeToast() {
         this.setState({alertShow: false})
