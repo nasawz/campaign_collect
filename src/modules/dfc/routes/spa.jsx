@@ -1,29 +1,29 @@
 /**
  * create by nasa.wang
  */
-import React, {PropTypes} from 'react'
-import {RouterMixin} from 'react-mini-router'
+import React, { PropTypes } from 'react'
+import { RouterMixin } from 'react-mini-router'
 
 import * as Actions from '../actions/homeActions.js'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Container from '../../common/container.jsx'
 import Home from '../containers/homeContainer.js'
 import Auth from '../containers/authContainer.js'
 import Result from '../containers/resultContainer.js'
 
-import {getQuery} from 'cex/helpers/url-processing.js'
-import {setItem, getItem} from 'cex/helpers/localstorage-processing.js'
-import {encode64, decode64} from 'cex/helpers/base64.js'
-import {_stringify, _parse} from 'cex/helpers/common.js'
+import { getQuery } from 'cex/helpers/url-processing.js'
+import { setItem, getItem } from 'cex/helpers/localstorage-processing.js'
+import { encode64, decode64 } from 'cex/helpers/base64.js'
+import { _stringify, _parse } from 'cex/helpers/common.js'
 
 const Routes = React.createClass({
     mixins: [RouterMixin],
     childContextTypes: {
         runType: PropTypes.string.isRequired
     },
-    getChildContext: function() {
+    getChildContext: function () {
         return {
             runType: 'spa'
         }
@@ -40,24 +40,27 @@ const Routes = React.createClass({
         } else {
             let openid = getQuery('openid')
             let access_token = getQuery('access_token')
+            // let access_token = 'aaaaa'
             if (openid && access_token) {
                 this.props.actions.auth(openid, access_token, (err, user) => {
                     user = encode64(_stringify(user))
                     setItem('collect_user', user)
                 })
             } else {
-                var callback = encodeURIComponent(window.location.href)
-                window.location.href = `http://auth.vkeve.com?callback=${callback}&client=toyota`
+                // var callback = encodeURIComponent(window.location.href)
+                // window.location.href = `http://auth.vkeve.com?callback=${callback}&client=klz`
+                let callback = encodeURIComponent(window.location.href)
+                window.location.href = 'http://cod.baleina.cn?callback=' + callback + '&client=klz'
             }
         }
     },
-    render () {
+    render() {
         if (!this.props.user) {
             return <Container><div /></Container>
         }
         return (
             <Container>
-                { this.renderCurrentRoute() }
+                {this.renderCurrentRoute()}
             </Container>
         )
     },
@@ -73,14 +76,14 @@ const Routes = React.createClass({
     notFound(path) {
         if (path == '/') {
             return <div />
-        }else{
+        } else {
             return <div className="not-found">Page Not Found: {path}</div>
         }
     }
 })
 
 function mapProps(state) {
-    return {name: state.DFC.name, user: state.DFC.user, collect: state.DFC.collect}
+    return { name: state.DFC.name, user: state.DFC.user, collect: state.DFC.collect }
 }
 
 function mapDispatchToProps(dispatch) {

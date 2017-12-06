@@ -102,7 +102,7 @@ var prodConfig = {
                 from: configWebpack.path.src + '/res/',
                 to: 'res/'
             }
-        ]),        
+        ]),
         new webpack.optimize.OccurrenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin(
             {

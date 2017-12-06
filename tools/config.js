@@ -19,7 +19,7 @@ var config = {
             dev: path.resolve(__basename, 'dev'),
             pub: path.resolve(__basename, 'dist'),
         },
-        defaultPath: '//localhost:'+port+'/',
+        defaultPath: '//localhost:' + port + '/',
         cdn: '',
         hash: '[hash:6]',
         chunkhash: '[chunkhash:6]',
